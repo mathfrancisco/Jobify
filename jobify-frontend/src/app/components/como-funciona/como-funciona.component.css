@@ -1,0 +1,261 @@
+
+/* Animações para cards */
+.hover\:shadow-xl {
+  transition: all 0.3s ease-in-out;
+}
+
+.hover\:shadow-xl:hover {
+  transform: translateY(-5px);
+}
+/* Gradiente animado */
+.bg-gradient-animate {
+  background-size: 200% 200%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Responsividade para imagens */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* how-it-works.component.css */
+/* Animações existentes */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes float-slow {
+  0% { transform: translateY(0px) translateX(0px); }
+  50% { transform: translateY(-30px) translateX(20px); }
+  100% { transform: translateY(0px) translateX(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+/* Glassmorphism effects */
+.backdrop-blur-xl {
+  backdrop-filter: blur(20px);
+}
+
+/* Hover animations */
+.hover\:transform {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Gradient text animation */
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gradient-text {
+  background-size: 200% auto;
+  animation: gradientFlow 5s ease infinite;
+}
+
+/* Input focus effects */
+.input-focus {
+  transition: all 0.3s ease;
+}
+
+.input-focus:focus {
+  box-shadow: 0 0 0 3px rgba(134, 194, 50, 0.3);
+}
+
+/* Button animations */
+.button-hover {
+  transition: all 0.3s ease;
+}
+
+.button-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(134, 194, 50, 0.2);
+}
+
+/* Image hover effects */
+.image-scale {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.image-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(134, 194, 50, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(134, 194, 50, 0.8);
+}
+
+/* Loading animations */
+@keyframes shimmer {
+  0% { background-position: -468px 0; }
+  100% { background-position: 468px 0; }
+}
+
+.loading-shimmer {
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.1) 40%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+/* Card transitions */
+.card-transition {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-transition:hover {
+  transform: translateY(-10px) scale(1.02);
+}
+
+/* Border glow effect */
+.border-glow {
+  transition: all 0.3s ease;
+}
+
+.border-glow:hover {
+  box-shadow: 0 0 20px rgba(134, 194, 50, 0.4);
+}
+
+/* Text animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Responsive design utilities */
+@media (max-width: 768px) {
+  .animate-float,
+  .animate-float-slow {
+    animation: none;
+  }
+
+  .card-hover:hover {
+    transform: none;
+  }
+}
+
+/* Form element styles */
+.form-input {
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-input:focus {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #86C232;
+}
+
+/* Price card highlight effect */
+.price-card-highlight {
+  position: relative;
+  overflow: hidden;
+}
+
+.price-card-highlight::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(134, 194, 50, 0.1) 0%,
+    transparent 70%
+  );
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Blog card image zoom effect */
+.blog-image-zoom {
+  overflow: hidden;
+}
+
+.blog-image-zoom img {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.blog-image-zoom:hover img {
+  transform: scale(1.1);
+}
+
+/* Contact form focus styles */
+.contact-input:focus {
+  outline: none;
+  border-color: #86C232;
+  box-shadow: 0 0 0 3px rgba(134, 194, 50, 0.2);
+}
+
+/* Button pulse animation */
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(134, 194, 50, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(134, 194, 50, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(134, 194, 50, 0); }
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+

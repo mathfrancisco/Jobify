@@ -1,0 +1,45 @@
+/* navbar.component.css */
+.nav-link {
+  @apply text-gray-300 hover:text-white transition-colors duration-200 font-medium;
+}
+
+.mobile-nav-link {
+  @apply block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-[#1d3d4e] transition-colors duration-200;
+}
+
+.mobile-cta {
+  @apply block w-full text-center px-3 py-2 rounded-md text-base font-medium bg-[#86C232] text-white hover:bg-opacity-90 transition-colors duration-200 mt-4;
+}
+
+/* Adicione animações suaves */
+.transition-transform {
+  transition-duration: 200ms;
+}
+
+/* Efeito de hover nos links */
+.nav-link:hover {
+  text-shadow: 0 0 8px rgba(134, 194, 50, 0.4);
+}
+
+/* Animação do menu mobile */
+.mobile-menu-enter {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.mobile-menu-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 200ms, transform 200ms;
+}
+
+.mobile-menu-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.mobile-menu-exit-active {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 200ms, transform 200ms;
+}

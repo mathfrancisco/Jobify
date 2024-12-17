@@ -1,0 +1,100 @@
+<!-- procura-candidatos.component.html -->
+<div class="bg-gradient-to-b from-[#0A192F] to-[#112B3C] min-h-screen py-16">
+  <div class="container mx-auto px-4">
+    <!-- Header Section -->
+    <div class="text-center mb-12">
+      <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">
+        Find Your Perfect
+        <span class="bg-gradient-to-r from-[#86C232] to-[#95D44A] text-transparent bg-clip-text">
+          Candidates
+        </span>
+      </h2>
+      <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+        Connect with talented professionals who match your requirements and company culture.
+      </p>
+    </div>
+
+    <!-- Search and Filter Section -->
+    <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 mb-12 max-w-4xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="relative">
+          <fa-icon [icon]="faSearch" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></fa-icon>
+          <input
+            type="text"
+            placeholder="Search by skill or role"
+            class="w-full pl-10 pr-4 py-3 bg-white/10 rounded-lg border border-gray-600 focus:border-[#86C232] text-white placeholder-gray-400">
+        </div>
+        <div class="relative">
+          <fa-icon [icon]="faLocationDot" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></fa-icon>
+          <input
+            type="text"
+            placeholder="Location"
+            class="w-full pl-10 pr-4 py-3 bg-white/10 rounded-lg border border-gray-600 focus:border-[#86C232] text-white placeholder-gray-400">
+        </div>
+        <select class="w-full py-3 px-4 bg-white/10 rounded-lg border border-gray-600 focus:border-[#86C232] text-white">
+          <option value="">Experience Level</option>
+          <option value="junior">Junior</option>
+          <option value="mid">Mid-Level</option>
+          <option value="senior">Senior</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Candidates Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div *ngFor="let candidato of candidatos"
+           class="bg-white/10 backdrop-blur-md rounded-xl p-6 hover:transform hover:-translate-y-2 transition-all duration-300">
+        <!-- Status Badge -->
+        <div class="absolute top-4 right-4">
+          <span class="bg-green-500/20 text-green-400 text-xs px-2 py-1 rounded-full">
+            Available
+          </span>
+        </div>
+
+        <!-- Candidate Info -->
+        <div class="text-center">
+          <div class="relative inline-block">
+            <img
+              [src]="candidato.foto || 'assets/default-avatar.png'"
+              [alt]="candidato.nome"
+              class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-[#86C232]/30">
+            <div class="absolute bottom-4 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+          </div>
+
+          <h3 class="text-xl font-semibold text-white mb-2">{{ candidato.nome }}</h3>
+          <p class="text-[#86C232] font-medium mb-4">{{ candidato.cargo }}</p>
+
+          <!-- Skills -->
+          <div class="flex flex-wrap justify-center gap-2 mb-6">
+            <span *ngFor="let habilidade of candidato.habilidades"
+                  class="bg-[#86C232]/20 text-[#86C232] py-1 px-3 rounded-full text-sm">
+              {{ habilidade }}
+            </span>
+          </div>
+
+          <!-- Actions -->
+          <div class="space-y-3">
+            <a [href]="candidato.curriculo"
+               target="_blank"
+               *ngIf="candidato.curriculo"
+               class="block w-full bg-[#86C232] text-white py-2 px-4 rounded-lg hover:bg-opacity-90 transition-colors">
+              View Profile
+            </a>
+            <button class="block w-full bg-transparent border border-[#86C232] text-[#86C232] py-2 px-4 rounded-lg hover:bg-[#86C232]/10 transition-colors">
+              Save Profile
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Load More Button -->
+    <div class="text-center mt-12" *ngIf="!allCandidatosLoaded">
+      <button (click)="loadMore()"
+              class="bg-gradient-to-r from-[#86C232] to-[#95D44A] text-white font-semibold py-3 px-8 rounded-xl hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">
+        Load More Candidates
+        <fa-icon [icon]="faArrowDown" class="ml-2"></fa-icon>
+      </button>
+    </div>
+  </div>
+</div>

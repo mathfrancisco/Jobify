@@ -1,0 +1,91 @@
+<!-- footer.component.html -->
+<footer class="bg-gradient-to-r from-[#112B3C] to-[#1B4965] text-gray-300 pt-12 pb-6">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+      <!-- About Section -->
+      <div class="space-y-4">
+        <h3 class="text-2xl font-bold bg-gradient-to-r from-[#86C232] to-[#95D44A] text-transparent bg-clip-text mb-4">Jobify</h3>
+        <p class="text-sm leading-relaxed">
+          Connecting talented professionals with innovative companies. Find your dream job or perfect candidate with Jobify's intelligent matching system.
+        </p>
+        <div class="flex space-x-4">
+          <a href="#" class="text-[#86C232] hover:text-white transition-colors">
+            <fa-icon [icon]="faLinkedin" size="lg"></fa-icon>
+          </a>
+          <a href="#" class="text-[#86C232] hover:text-white transition-colors">
+            <fa-icon [icon]="faTwitter" size="lg"></fa-icon>
+          </a>
+          <a href="#" class="text-[#86C232] hover:text-white transition-colors">
+            <fa-icon [icon]="faFacebook" size="lg"></fa-icon>
+          </a>
+          <a href="#" class="text-[#86C232] hover:text-white transition-colors">
+            <fa-icon [icon]="faInstagram" size="lg"></fa-icon>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+        <ul class="space-y-2">
+          <li>
+            <a routerLink="/procura-trabalho" class="hover:text-[#86C232] transition-colors">Find Jobs</a>
+          </li>
+          <li>
+            <a routerLink="/procura-candidatos" class="hover:text-[#86C232] transition-colors">Find Candidates</a>
+          </li>
+          <li>
+            <a routerLink="/blog" class="hover:text-[#86C232] transition-colors">Career Blog</a>
+          </li>
+          <li>
+            <a routerLink="/pricing" class="hover:text-[#86C232] transition-colors">Pricing Plans</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div>
+        <h4 class="text-white font-semibold mb-4">Resources</h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="#" class="hover:text-[#86C232] transition-colors">About Us</a>
+          </li>
+          <li>
+            <a href="#" class="hover:text-[#86C232] transition-colors">Terms & Conditions</a>
+          </li>
+          <li>
+            <a href="#" class="hover:text-[#86C232] transition-colors">Privacy Policy</a>
+          </li>
+          <li>
+            <a href="#" class="hover:text-[#86C232] transition-colors">Help Center</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div>
+        <h4 class="text-white font-semibold mb-4">Stay Updated</h4>
+        <p class="text-sm mb-4">Subscribe to our newsletter for the latest job opportunities and career insights.</p>
+        <div class="flex">
+          <input type="email" placeholder="Enter your email"
+                 class="bg-gray-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-[#86C232] w-full">
+          <button class="bg-[#86C232] text-white px-4 py-2 rounded-r-lg hover:bg-opacity-90 transition-colors">
+            <fa-icon [icon]="faPaperPlane"></fa-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="border-t border-gray-700 pt-8 mt-8">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <p class="text-sm">&copy; 2024 Jobify. All rights reserved.</p>
+        <div class="flex space-x-4 mt-4 md:mt-0">
+          <a href="#" class="text-sm hover:text-[#86C232] transition-colors">Terms</a>
+          <a href="#" class="text-sm hover:text-[#86C232] transition-colors">Privacy</a>
+          <a href="#" class="text-sm hover:text-[#86C232] transition-colors">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
