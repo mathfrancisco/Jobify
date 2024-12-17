@@ -26,7 +26,10 @@ public class Vaga {
     private String linkAplicacao;
     @ElementCollection // Para persistir a lista de Strings
     private List<String> skills;
-
+    
+    @ManyToOne
+    @JoinColumn(name = "recrutador_id")
+    private Recrutador recrutador; 
 
     // Construtor vazio (necessário para o JPA)
     public Vaga() { }
