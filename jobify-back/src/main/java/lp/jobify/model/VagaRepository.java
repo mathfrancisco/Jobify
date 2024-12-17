@@ -1,4 +1,9 @@
-import org.springframework.data.jpa.repository.JpaRepository;
+// VagaRepository.java
 import lp.jobify.model.Vaga;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface VagaRepository extends JpaRepository<Vaga, Long> { }
+import java.util.List;
+
+public interface VagaRepository extends JpaRepository<Vaga, Long> {
+    List<Vaga> findByRecrutadorId(Long recrutadorId);
+}
