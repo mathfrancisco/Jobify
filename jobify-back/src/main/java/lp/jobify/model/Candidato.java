@@ -1,14 +1,9 @@
-package lp.jobify.model;
-
-import lombok.Getter;
-import lombok.Setter;
-
-@Setter
-@Getter
-import javax.persistence.*;
+package lp.jobify.model;// Candidato.java
+import jakarta.persistence.*;
 
 @Entity
 public class Candidato {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,10 +13,8 @@ public class Candidato {
     private String habilidades;
     private String cargo;
 
-    // Construtor (sem argumentos é necessário para o JPA)
     public Candidato() {}
 
-    // Construtor com argumentos
     public Candidato(String nome, String email, String habilidades, String cargo) {
         this.nome = nome;
         this.email = email;
@@ -29,5 +22,45 @@ public class Candidato {
         this.cargo = cargo;
     }
 
+    // Getters e Setters para todos os campos
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getHabilidades() {
+        return habilidades;
+    }
+
+    public void setHabilidades(String habilidades) {
+        this.habilidades = habilidades;
+    }
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
 }
+

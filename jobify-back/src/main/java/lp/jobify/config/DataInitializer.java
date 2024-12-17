@@ -1,3 +1,5 @@
+package lp.jobify.config;
+
 import lp.jobify.model.Candidato;
 import lp.jobify.model.Recrutador;
 import lp.jobify.model.Vaga;

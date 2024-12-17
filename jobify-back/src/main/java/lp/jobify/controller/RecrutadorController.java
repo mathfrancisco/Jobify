@@ -1,4 +1,4 @@
-// RecrutadorController.java
+package lp.jobify.controller;// RecrutadorController.java
 import lp.jobify.model.Recrutador;
 import lp.jobify.repository.RecrutadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class RecrutadorController {
     }
 
     @PostMapping
-    public ResponseEntity<Recrutador> criarRecrutador(@RequestBody Recrutador recrutador) {
+    public ResponseEntity<Recrutador> criarRecrutador(@RequestBody Recrutador recrutador) { // Adicionado @RequestBody
         Recrutador novoRecrutador = recrutadorRepository.save(recrutador);
         return ResponseEntity.status(HttpStatus.CREATED).body(novoRecrutador);
     }

@@ -1,4 +1,4 @@
-// CandidatoController.java
+package lp.jobify.controller;// CandidatoController.java
 import lp.jobify.model.Candidato;
 import lp.jobify.repository.CandidatoRepository;
 import org.springframework.beans.factory.annotation.Autowired;

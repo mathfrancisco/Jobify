@@ -1,4 +1,4 @@
-// VagaController.java
+package lp.jobify.controller;// VagaController.java
 import lp.jobify.model.Vaga;
 import lp.jobify.repository.VagaRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-// VagaRepository.java
+package lp.jobify.repository;// VagaRepository.java
 import lp.jobify.model.Vaga;
 import org.springframework.data.jpa.repository.JpaRepository;
 
