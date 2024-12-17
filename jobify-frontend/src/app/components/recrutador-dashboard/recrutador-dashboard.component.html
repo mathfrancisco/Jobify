@@ -1,0 +1,19 @@
+<div *ngIf="recrutador">
+  <h1>Bem-vindo, {{ recrutador.nome }}!</h1>
+  <p>Empresa: {{ recrutador.empresa }}</p>
+
+  <h2>Suas vagas:</h2>
+  <ul>
+    <li *ngFor="let vaga of vagas">
+      <h3>{{ vaga.titulo }}</h3>
+      <p>{{ vaga.descricao }}</p>
+      <!-- Exibir outras informações da vaga -->
+    </li>
+  </ul>
+
+  <button routerLink="/criar-vaga">Criar nova vaga</button>
+</div>
+
+<div *ngIf="!recrutador">
+  <p>Recrutador não encontrado.</p>
+</div>

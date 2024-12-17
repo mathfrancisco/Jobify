@@ -1,7 +1,7 @@
 // vaga.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { Vaga } from '../models/vaga';
 
 @Injectable({
@@ -14,5 +14,13 @@ export class VagaService {
 
   getVagas(): Observable<Vaga[]> {
     return this.http.get<Vaga[]>(`${this.apiUrl}/vagas`);
+  }
+  getVagasPorRecrutador(recrutadorId: number): Observable<Vaga[]> {
+    return this.http.get<Vaga[]>(`${this.apiUrl}/vagas/recrutador/${recrutadorId}`).pipe(
+      catchError((error: any) => {
+        console.error('Erro ao buscar vagas por recrutador:', error);
+        return throwError(() => new Error('Erro ao buscar vagas por recrutador'));
+      })
+    );
   }
 }
