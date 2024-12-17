@@ -1,19 +1,53 @@
-<div *ngIf="recrutador">
-  <h1>Bem-vindo, {{ recrutador.nome }}!</h1>
-  <p>Empresa: {{ recrutador.empresa }}</p>
+<!-- recrutador-dashboard.component.html -->
+<div class="bg-gradient-to-b from-[#0A192F] via-[#112B3C] to-[#1B4965] min-h-screen px-4 py-10">
+  <div class="container mx-auto max-w-5xl">
+    <div *ngIf="recrutador" class="bg-white/10 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/10 mb-10">
+      <div class="flex items-center mb-6">
+        <img *ngIf="recrutador.logo" [src]="recrutador.logo" alt="Logo da empresa" class="w-20 h-20 rounded-full mr-4">
+        <h1 class="text-3xl font-bold text-white">Bem-vindo, {{ recrutador.nome }}!</h1>
+      </div>
 
-  <h2>Suas vagas:</h2>
-  <ul>
-    <li *ngFor="let vaga of vagas">
-      <h3>{{ vaga.titulo }}</h3>
-      <p>{{ vaga.descricao }}</p>
-      <!-- Exibir outras informações da vaga -->
-    </li>
-  </ul>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <p class="text-gray-300 mb-2">Empresa:</p>
+          <p class="text-white">{{ recrutador.empresa }}</p>
+        </div>
+        <div>
+          <p class="text-gray-300 mb-2">Email:</p>
+          <p class="text-white">{{ recrutador.email }}</p>
+        </div>
+         <div *ngIf="recrutador.site" class="md:col-span-2">
+          <p class="text-gray-300 mb-2">Site:</p>
+          <a [href]="recrutador.site" target="_blank" class="text-[#86C232] hover:underline">{{ recrutador.site }}</a>
+        </div>
+        <div *ngIf="recrutador.descricao" class="md:col-span-2">
+          <p class="text-gray-300 mb-2">Descrição:</p>
+          <p class="text-white">{{ recrutador.descricao }}</p>
+        </div>
+      </div>
 
-  <button routerLink="/criar-vaga">Criar nova vaga</button>
+      <div class="mt-8">
+        <button class="bg-[#86C232] hover:bg-opacity-90 text-white font-semibold py-2 px-4 rounded-lg transition-colors">Editar Perfil</button>
+      </div>
+    </div>
+
+    <div *ngIf="!recrutador" class="text-center text-white mt-10">
+      <p>Recrutador não encontrado.</p>
+    </div>
+
+
+    <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/10 mt-10">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold text-white">Suas vagas</h2>
+        <button routerLink="/criar-vaga" class="bg-[#86C232] hover:bg-opacity-90 text-white font-semibold py-2 px-4 rounded-lg transition-colors">Criar nova vaga</button>
+      </div>
+      <div *ngFor="let vaga of vagas" class="border-b border-gray-700 py-4">
+        <h3 class="text-xl text-white font-medium mb-2">{{ vaga.titulo }}</h3>
+        <p class="text-gray-400">{{ vaga.descricao }}</p>
+        <!-- Exibir outras informações da vaga -->
+      </div>
+    </div>
+
+  </div>
 </div>
 
-<div *ngIf="!recrutador">
-  <p>Recrutador não encontrado.</p>
-</div>
