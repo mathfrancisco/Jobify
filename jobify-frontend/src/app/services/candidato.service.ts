@@ -1,3 +1,4 @@
+// candidato.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -7,7 +8,7 @@ import { Candidato } from '../models/candidato';
   providedIn: 'root'
 })
 export class CandidatoService {
-  private apiUrl = 'http://localhost:8080/api'; // URL da sua API
+  private apiUrl = 'http://localhost:8080/api'; // URL da sua API Spring
 
   constructor(private http: HttpClient) { }
 
@@ -15,4 +16,3 @@ export class CandidatoService {
     return this.http.get<Candidato[]>(`${this.apiUrl}/candidatos`);
   }
 }
-
