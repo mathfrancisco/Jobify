@@ -1,52 +1,66 @@
-# Jobify Plataforma de Recrutamento
+# Jobify - The Future of Recruiting
 
-Este projeto é uma landing page para uma futura plataforma de recrutamento, desenvolvida com Spring Boot no backend e Angular 18 no frontend.  O objetivo é apresentar a plataforma e suas funcionalidades, além de coletar leads de potenciais usuários.
+Jobify is a modern and intuitive recruiting platform designed to connect top talent with exciting opportunities. This project showcases a landing page built with Spring Boot and Angular, offering a glimpse into the future of job searching and hiring.
 
-## Funcionalidades
+[![Jobify Demo](https://img.youtube.com/vi/YOUR_DEMO_VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=YOUR_DEMO_VIDEO_ID)  *(Replace with your demo video link)*
 
-* **Página inicial:** Apresentação da plataforma e seus benefícios.
-* **Procura de Trabalho:**  Exibe vagas de emprego mockadas (sem banco de dados).
-* **Procura de Candidatos:** Exibe candidatos mockados (sem banco de dados).
-* **Como Funciona:**  Explica o funcionamento da plataforma.
-* **Contato:**  Formulário de contato para envio de mensagens (com envio de email simulado).
-* **Login:** Mockup visual do formulário de login (sem funcionalidade real).
-* **Design moderno e responsivo:** Utiliza Tailwind CSS para estilização e responsividade.
 
-## Tecnologias Utilizadas
+## Key Features
 
-* **Backend:** Java, Spring Boot, Spring Mail.
-* **Frontend:** Angular 18, TypeScript, Tailwind CSS, HTML, CSS.
+* **Sleek and Intuitive Interface:**  Experience a seamless job search and application process with our user-friendly design.
+* **AI-Powered Matching:** Our intelligent algorithms connect you with the most relevant opportunities based on your skills and experience.
+* **Personalized Job Recommendations:** Discover jobs tailored to your interests and career goals.
+* **Advanced Search Filters:**  Find the perfect job with our powerful search and filtering options.
+* **Direct Messaging:** Communicate directly with recruiters and hiring managers.
+* **Real-Time Notifications:** Stay updated on the status of your applications and new job postings.
+* **Secure and Reliable Platform:** Your data is safe and secure with our robust infrastructure.
 
-## Como Executar o Projeto
+## Tech Stack
 
-### Backend (Spring Boot)
+* **Backend:** Java, Spring Boot, Spring Data JPA, Spring Security (for future authentication), PostgreSQL (planned for future database integration).
+* **Frontend:** Angular 18, TypeScript, Tailwind CSS, FontAwesome.
 
-1.  Clone o repositório.
-2.  Navegue até a pasta do backend.
-3.  Execute o projeto com: `./mvnw spring-boot:run`.
-4.  A API estará disponível em `http://localhost:8080/api`.
+## Getting Started
 
-### Frontend (Angular)
+### Prerequisites
 
-1.  Clone o repositório.
-2.  Navegue até a pasta do frontend.
-3.  Instale as dependências: `npm install`.
-4.  Execute o projeto: `ng serve`.
-5.  A aplicação estará disponível em `http://localhost:4200/`.
+* Java Development Kit (JDK) 17 or higher
+* Node.js and npm (or yarn)
+* Angular CLI
 
-## Próximos Passos
+### Backend
 
-* Implementar a funcionalidade completa de login e cadastro de usuários.
-* Integrar com um banco de dados para persistir os dados de vagas, candidatos e usuários.
-* Implementar as funcionalidades de busca e filtro de vagas e candidatos.
-* Adicionar recursos de administração para gerenciar os dados da plataforma.
+1. Clone the repository: `git clone https://github.com/YOUR_USERNAME/Jobify.git`
+2. Navigate to the backend directory: `cd jobify-backend`
+3. Build and run the application: `./mvnw spring-boot:run`
+4. The API will be available at `http://localhost:8080/api`
 
-## Contribuições
+### Frontend
 
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests.
+1. Navigate to the frontend directory: `cd jobify-frontend`
+2. Install dependencies: `npm install`
+3. Run the development server: `ng serve`
+4. The application will be available at `http://localhost:4200`
 
-## Licença
+## Project Roadmap
 
-[MIT](https://choosealicense.com/licenses/mit/)
+* **Phase 1 (Current):** Landing page development and API endpoints for mock data.
+* **Phase 2:** User authentication (login/signup) and profile management.
+* **Phase 3:** Database integration (PostgreSQL) and persistent data storage.
+* **Phase 4:** Advanced search and filtering functionality.
+* **Phase 5:** Admin dashboard for managing jobs, candidates, and platform settings.
+
+## Contributing
+
+We welcome contributions!  Please feel free to open issues and submit pull requests.  See our [Contribution Guidelines](CONTRIBUTING.md) for more details.  *(Create a CONTRIBUTING.md file)*
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details. *(Create a LICENSE.md file with the MIT License)*
+
+
+## Contact
+
+For any questions or inquiries, please contact us at jobify@example.com.
 
 
