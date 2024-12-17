@@ -13,6 +13,11 @@ export class CandidatoService {
   constructor(private http: HttpClient) { }
 
   getCandidatos(): Observable<Candidato[]> {
-    return this.http.get<Candidato[]>(`${this.apiUrl}/candidatos`);
-  }
+  return this.http.get<Candidato[]>(`${this.apiUrl}/candidatos`).pipe(
+    catchError(error => {
+      console.error('Erro ao buscar candidatos:', error);
+      return throwError(() => new Error('Erro ao buscar candidatos')); // Ou retorne um observable de erro
+    })
+  );
+}
 }
