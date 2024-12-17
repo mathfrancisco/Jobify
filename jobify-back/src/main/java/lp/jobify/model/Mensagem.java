@@ -1,20 +1,13 @@
 package lp.jobify.model;
 
-
-import lombok.Getter;
-import lombok.Setter;
-
-@Setter
-@Getter
 public class Mensagem {
 
-    // Getters e Setters
     private String nome;
     private String email;
     private String mensagem;
 
-    // Construtores (opcional, mas recomendado)
-    public Mensagem() {} // Construtor vazio
+    // Construtores
+    public Mensagem() {}
 
     public Mensagem(String nome, String email, String mensagem) {
         this.nome = nome;
@@ -22,6 +15,28 @@ public class Mensagem {
         this.mensagem = mensagem;
     }
 
+    // Getters e Setters (gerados manualmente)
+    public String getNome() {
+        return nome;
+    }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
+    }
 }
-
