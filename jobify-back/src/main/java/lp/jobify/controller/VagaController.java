@@ -22,12 +22,40 @@ public class VagaController {
         return ResponseEntity.ok(vagas);
     }
 
-    // Implemente os métodos buscarPorId, criar, atualizar e excluir,
-    // seguindo o exemplo do CandidatoController.
+    @GetMapping("/{id}")
+    public ResponseEntity<Vaga> buscarVagaPorId(@PathVariable Long id) {
+        Optional<Vaga> vaga = vagaRepository.findById(id);
+        return vaga.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
 
-    @GetMapping("/recrutador/{recrutadorId}") // Vagas por recrutador
+    @PostMapping
+    public ResponseEntity<Vaga> criarVaga(@RequestBody Vaga vaga) {
+        Vaga novaVaga = vagaRepository.save(vaga);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novaVaga);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Vaga> atualizarVaga(@PathVariable Long id, @RequestBody Vaga vaga) {
+        if (!vagaRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        vaga.setId(id);
+        Vaga vagaAtualizada = vagaRepository.save(vaga);
+        return ResponseEntity.ok(vagaAtualizada);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluirVaga(@PathVariable Long id) {
+        if (!vagaRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        vagaRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/recrutador/{recrutadorId}")
     public ResponseEntity<List<Vaga>> listarVagasPorRecrutador(@PathVariable Long recrutadorId) {
-        List<Vaga> vagas = vagaRepository.findByRecrutadorId(recrutadorId); // Implemente este método no repositório
+        List<Vaga> vagas = vagaRepository.findByRecrutadorId(recrutadorId);
         return ResponseEntity.ok(vagas);
     }
 }
