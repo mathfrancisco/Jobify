@@ -20,10 +20,21 @@ export class CandidatoService {
     );
   }
   getCandidatoByEmail(email: string): Observable<Candidato | undefined> {
-    return this.http.get<Candidato[]>(`${this.apiUrl}/candidatos`).pipe(
-      map(candidatos => candidatos.find(c => c.email === email)), // Filtra o array pelo email
-      catchError(_ => of(undefined)) // Retorna undefined se não encontrar
+    return this.http.get<Candidato>(`${this.apiUrl}/candidatos/email/${email}`).pipe(
+      catchError(_ => of(undefined))
     );
   }
+
+
+  // candidato.service.ts
+  getCandidatoById(id: number): Observable<Candidato | undefined> {
+    return this.http.get<Candidato>(`${this.apiUrl}/candidatos/${id}`).pipe(
+      catchError(error => {
+        console.error(`Erro ao buscar candidato por ID ${id}:`, error);
+        return of(undefined);
+      })
+    );
+  }
+
 
 }

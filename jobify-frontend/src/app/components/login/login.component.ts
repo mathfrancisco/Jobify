@@ -17,9 +17,9 @@ import { Recrutador } from '../../models/recrutador'
 })
 export class LoginComponent {
   tipoUsuario: 'candidato' | 'recrutador' = 'candidato';
-  email = ''; // Variável para o email
-  password = ''; // Variável para a senha
-  errorMessage = ''; // Variável para exibir mensagens de erro
+  email = '';
+  password = '';
+  errorMessage = '';
 
   constructor(
     private router: Router,
@@ -28,17 +28,16 @@ export class LoginComponent {
   ) {}
 
   login() {
-    this.errorMessage = ''; // Limpa a mensagem de erro
+    this.errorMessage = '';
 
     if (this.tipoUsuario === 'candidato') {
       this.candidatoService.getCandidatoByEmail(this.email).subscribe({
-        next: (candidato: Candidato | undefined) => {
-          if (candidato) { // Verifica se o candidato existe
-            // Aqui você deve comparar a senha fornecida com a senha do candidato (se armazenada)
-            // Por simplicidade, vamos assumir que a senha está correta
-            this.router.navigate(['/candidato-dashboard', candidato.id]); // Navega para a página do candidato com o ID
+        next: (candidato) => {
+          if (candidato && candidato.senha === this.password) {
+            const candidatoId = Number(candidato.id); // Converte para number
+            this.router.navigate(['/candidato-dashboard', candidatoId]);
           } else {
-            this.errorMessage = 'Candidato não encontrado.';
+            this.errorMessage = 'Email ou senha inválidos.';
           }
         },
         error: (error) => {
@@ -48,12 +47,12 @@ export class LoginComponent {
       });
     } else { // Recrutador
       this.recrutadorService.getRecrutadorByEmail(this.email).subscribe({
-        next: (recrutador: Recrutador | undefined) => {
-          if (recrutador) {
-            // Mesma lógica de comparação de senha que para o candidato
-            this.router.navigate(['/recrutador-dashboard', recrutador.id]);
+        next: (recrutador) => {
+          if (recrutador && recrutador.senha === this.password) {
+            const recrutadorId = Number(recrutador.id)
+            this.router.navigate(['/recrutador-dashboard', recrutador.id]); // Passa o ID do recrutador
           } else {
-            this.errorMessage = 'Recrutador não encontrado.';
+            this.errorMessage = 'Email ou senha inválidos.';
           }
         },
         error: (error) => {

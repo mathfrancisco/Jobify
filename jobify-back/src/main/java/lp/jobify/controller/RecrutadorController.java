@@ -27,6 +27,11 @@ public class RecrutadorController {
         Optional<Recrutador> recrutador = recrutadorRepository.findById(id);
         return recrutador.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
+    @GetMapping("/email/{email}")
+    public ResponseEntity<Recrutador> buscarRecrutadorPorEmail(@PathVariable String email) {
+        Optional<Recrutador> recrutador = recrutadorRepository.findByEmail(email);
+        return recrutador.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
 
     @PostMapping
     public ResponseEntity<Recrutador> criarRecrutador(@RequestBody Recrutador recrutador) { // Adicionado @RequestBody

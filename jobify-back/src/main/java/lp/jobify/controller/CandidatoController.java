@@ -27,6 +27,11 @@ public class CandidatoController {
         Optional<Candidato> candidato = candidatoRepository.findById(id);
         return candidato.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
+    @GetMapping("/email/{email}") // Novo endpoint
+    public ResponseEntity<Candidato> buscarCandidatoPorEmail(@PathVariable String email) {
+        Optional<Candidato> candidato = candidatoRepository.findByEmail(email); // findByEmail no repository
+        return candidato.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
 
     @PostMapping
     public ResponseEntity<Candidato> criarCandidato(@RequestBody Candidato candidato) {

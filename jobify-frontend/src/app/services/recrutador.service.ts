@@ -22,8 +22,7 @@ export class RecrutadorService {
   }
 
   getRecrutadorByEmail(email: string): Observable<Recrutador | undefined> {
-    return this.http.get<Recrutador[]>(`${this.apiUrl}/recrutadores`).pipe(
-      map(recrutadores => recrutadores.find(r => r.email === email)),
+    return this.http.get<Recrutador>(`${this.apiUrl}/recrutadores/email/${email}`).pipe(
       catchError(_ => of(undefined))
     );
   }

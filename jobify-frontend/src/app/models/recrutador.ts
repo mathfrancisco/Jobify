@@ -8,4 +8,5 @@ export interface Recrutador {
   logo?: string; // URL da logo da empresa (opcional)
   descricao?: string; // Descrição da empresa (opcional)
   site?: string; // Site da empresa (opcional)
+  senha: string;
 }

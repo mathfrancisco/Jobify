@@ -6,5 +6,5 @@ export interface Candidato {
   cargo: string;
   foto?: string; // Propriedade opcional para a foto
   curriculo?: string; // Propriedade opcional para o link do currículo
+  senha: string;
 }
-

@@ -1,26 +1,28 @@
 <!-- login.component.html -->
-<div class="min-h-screen bg-gray-100 flex items-center justify-center px-4">
-  <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-    <h2 class="text-2xl font-bold text-center mb-6">Welcome to Jobify</h2>
+<div class="min-h-screen bg-gradient-to-b from-[#0A192F] via-[#112B3C] to-[#1B4965] flex items-center justify-center px-4">
+  <div class="bg-white/10 backdrop-blur-xl p-8 rounded-3xl shadow-2xl w-full max-w-md border border-white/10">
+    <h2 class="text-3xl font-bold text-center text-white mb-6">Welcome to Jobify</h2>
 
     <div class="mb-4">
-      <label for="tipoUsuario" class="block text-gray-700 font-medium mb-2">Login As:</label>
-      <select id="tipoUsuario" class="w-full border rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#86C232]" [(ngModel)]="tipoUsuario">
+      <label for="tipoUsuario" class="block text-gray-300 font-medium mb-2">Login As:</label>
+      <select id="tipoUsuario" [(ngModel)]="tipoUsuario" class="w-full bg-white/10 border border-gray-600 text-white py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232]">
         <option value="candidato">Candidate</option>
         <option value="recrutador">Recruiter</option>
       </select>
     </div>
 
     <div class="mb-4">
-      <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
-      <input type="email" id="email" class="w-full border rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#86C232]" placeholder="Enter your email">
+      <label for="email" class="block text-gray-300 font-medium mb-2">Email</label>
+      <input type="email" id="email" [(ngModel)]="email" placeholder="Enter your email" class="w-full bg-white/10 border border-gray-600 text-white py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232]">
     </div>
 
     <div class="mb-6">
-      <label for="password" class="block text-gray-700 font-medium mb-2">Password</label>
-      <input type="password" id="password" class="w-full border rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#86C232]" placeholder="Enter your password">
+      <label for="password" class="block text-gray-300 font-medium mb-2">Password</label>
+      <input type="password" id="password" [(ngModel)]="password" placeholder="Enter your password" class="w-full bg-white/10 border border-gray-600 text-white py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232]">
     </div>
 
-    <button class="bg-[#86C232] text-white font-bold py-2 px-4 rounded-lg w-full hover:bg-opacity-90 transition-colors" (click)="login()">Login</button>
+    <div *ngIf="errorMessage" class="text-red-500 mb-4">{{ errorMessage }}</div>
+
+    <button (click)="login()" class="w-full bg-gradient-to-r from-[#86C232] to-[#95D44A] text-white font-semibold py-2 px-4 rounded-lg hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">Login</button>
   </div>
 </div>

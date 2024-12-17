@@ -38,6 +38,16 @@ export const routes: Routes = [
     title: 'Jobify - Login'
   },
   {
+    path: 'candidato-dashboard/:id', // Rota com parâmetro para o ID do candidato
+    loadComponent: () => import('./components/candidato-dashboard/candidato-dashboard.component').then(c => c.CandidatoDashboardComponent),
+    title: 'Jobify - Candidato Dashboard'
+  },
+  {
+    path: 'recrutador-dashboard/:id', // Rota com parâmetro para o ID do recrutador
+    loadComponent: () => import('./components/recrutador-dashboard/recrutador-dashboard.component').then(c => c.RecrutadorDashboardComponent),
+    title: 'Jobify - Recrutador Dashboard'
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'

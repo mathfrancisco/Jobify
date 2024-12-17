@@ -12,15 +12,17 @@ public class Recrutador {
     private String nome;
     private String email;
     private String empresa;
+    private String senha;
 
     // Construtor vazio
     public Recrutador() {}
 
     // Construtor com argumentos
-    public Recrutador(String nome, String email, String empresa) {
+    public Recrutador(String nome, String email, String empresa,String senha) {
         this.nome = nome;
         this.email = email;
         this.empresa = empresa;
+        this.senha = senha;
     }
 
     // Getters e Setters para todos os campos (id, nome, email, empresa)
@@ -32,5 +34,7 @@ public class Recrutador {
     public void setEmail(String email) { this.email = email; }
     public String getEmpresa() { return empresa; }
     public void setEmpresa(String empresa) { this.empresa = empresa; }
+    public String getSenha() { return senha; }
+    public void setSenha(String senha) { this.senha = senha; }
 
 }

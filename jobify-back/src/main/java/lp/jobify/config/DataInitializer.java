@@ -28,16 +28,16 @@ public class DataInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         // Criar Candidatos
-        Candidato candidato1 = new Candidato("João Silva", "joao.silva@email.com", "Java, Spring", "Desenvolvedor Java");
-        Candidato candidato2 = new Candidato("Maria Souza", "maria.souza@email.com", "Python, Data Science", "Cientista de Dados");
-        Candidato candidato3 = new Candidato("Pedro Santos", "pedro.santos@email.com", "C++, Desenvolvimento de Jogos", "Desenvolvedor C++");
+            Candidato candidato1 = new Candidato("João Silva", "joao.silva@email.com", "Java, Spring", "Desenvolvedor Java", "João_Silva");
+            Candidato candidato2 = new Candidato("Maria Souza", "maria.souza@email.com", "Python, Data Science", "Cientista de Dados", "Maria_Souza");
+            Candidato candidato3 = new Candidato("Pedro Santos", "pedro.santos@email.com", "C++, Desenvolvimento de Jogos", "Desenvolvedor C++", "Pedro_Santos");
 
         candidatoRepository.saveAll(Arrays.asList(candidato1, candidato2, candidato3));
 
         // Criar Recrutadores
-        Recrutador recrutador1 = new Recrutador("Empresa A", "recrutador1@empresaA.com", "Empresa A");
-        Recrutador recrutador2 = new Recrutador("Empresa B", "recrutador2@empresaB.com", "Empresa B");
-        Recrutador recrutador3 = new Recrutador("Empresa C", "recrutador3@empresaC.com", "Empresa C");
+            Recrutador recrutador1 = new Recrutador("Tech Recruiter 1", "recrutador1@empresaA.com", "Empresa A", "Empresa A");
+            Recrutador recrutador2 = new Recrutador("Tech Recruiter 2", "recrutador2@empresaB.com", "Empresa B", "Empresa B");
+            Recrutador recrutador3 = new Recrutador("Tech Recruiter 3", "recrutador3@empresaC.com", "Empresa C", "Empresa C");
 
         recrutadorRepository.saveAll(Arrays.asList(recrutador1, recrutador2, recrutador3));
 

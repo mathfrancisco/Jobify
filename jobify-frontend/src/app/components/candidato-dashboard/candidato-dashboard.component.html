@@ -1,1 +1,12 @@
-<p>candidato-dashboard works!</p>
+<!-- candidato-dashboard.component.html -->
+<div *ngIf="candidato">
+  <h1>Bem-vindo, {{ candidato.nome }}!</h1>
+  <p>Email: {{ candidato.email }}</p>
+  <p>Cargo: {{ candidato.cargo }}</p>
+  <p>Habilidades: {{ candidato.habilidades.join(', ') }}</p>
+
+  </div>
+
+<div *ngIf="!candidato">
+  <p>Candidato não encontrado.</p>
+</div>

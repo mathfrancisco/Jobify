@@ -12,14 +12,16 @@ public class Candidato {
     private String email;
     private String habilidades;
     private String cargo;
+    private String senha;
 
     public Candidato() {}
 
-    public Candidato(String nome, String email, String habilidades, String cargo) {
+    public Candidato(String nome, String email, String habilidades, String cargo, String senha) {
         this.nome = nome;
         this.email = email;
         this.habilidades = habilidades;
         this.cargo = cargo;
+        this.senha = senha;
     }
 
     // Getters e Setters para todos os campos
@@ -61,6 +63,14 @@ public class Candidato {
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
+    }
+    // Getter e Setter para senha
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }
 
