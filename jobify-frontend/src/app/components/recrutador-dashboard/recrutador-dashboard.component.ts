@@ -16,9 +16,10 @@ import { Observable, of, switchMap, map } from 'rxjs';
   styleUrls: ['./recrutador-dashboard.component.css']
 })
 export class RecrutadorDashboardComponent implements OnInit {
-  recrutador$: Observable<Recrutador | undefined> = of(undefined); // Use Observable para recrutador
-  vagas$: Observable<Vaga[]> = of([]); // Use Observable para vagas
+  recrutador$: Observable<Recrutador | undefined> = of(undefined);
+  vagas$: Observable<Vaga[]> = of([]);
   editandoPerfil = false;
+  recrutadorOriginal: Recrutador | undefined; // Para armazenar os dados originais
 
   constructor(
     private route: ActivatedRoute,
@@ -45,16 +46,23 @@ export class RecrutadorDashboardComponent implements OnInit {
         if (recrutador) {
           return this.vagaService.getVagasPorRecrutador(recrutador.id);
         } else {
-          return of([]); // Retorna um array vazio se o recrutador não for encontrado
+          return of([]);
         }
       })
     );
+
+    // Armazena os dados originais do recrutador quando o observable emitir um valor
+    this.recrutador$.subscribe(recrutador => {
+      if (recrutador) {
+        this.recrutadorOriginal = { ...recrutador };
+      }
+    });
   }
 
   criarNovaVaga() {
     this.recrutador$.subscribe(recrutador => {
       if (recrutador) {
-        this.router.navigate(['/criar-vaga', recrutador.id]);
+        this.router.navigate(['/criar-vaga', recrutador.id]); // Corrigido: usar recrutador.id
       } else {
         console.error("Recrutador não definido. Não é possível criar uma vaga.");
       }
@@ -62,34 +70,32 @@ export class RecrutadorDashboardComponent implements OnInit {
   }
 
   editarPerfil() {
-    this.editandoPerfil = !this.editandoPerfil;
+    this.editandoPerfil = true;
   }
 
-  salvarAlteracoes() {
-    this.recrutador$.subscribe(recrutador => {
-      if (recrutador) {
-        this.recrutadorService.atualizarRecrutador(recrutador).subscribe({
-          next: recrutadorAtualizado => {
-            if (recrutadorAtualizado) {
-              this.recrutador$ = of(recrutadorAtualizado); // Atualiza o recrutador$
-              this.editandoPerfil = false;
-            } else {
-              console.error("Não foi possível atualizar o recrutador.");
-            }
-          },
-          error: error => {
-            console.error('Erro ao atualizar recrutador:', error);
-          }
-        });
+  salvarAlteracoes(recrutador: Recrutador) {
+    this.recrutadorService.atualizarRecrutador(recrutador).subscribe({
+      next: recrutadorAtualizado => {
+        if (recrutadorAtualizado) {
+          this.recrutador$ = of(recrutadorAtualizado);
+          this.recrutadorOriginal = { ...recrutadorAtualizado }; // Atualiza o original
+          this.editandoPerfil = false;
+        } else {
+          console.error("Não foi possível atualizar o recrutador.");
+        }
+      },
+      error: error => {
+        console.error('Erro ao atualizar recrutador:', error);
       }
     });
   }
 
   cancelarEdicao() {
+    if (this.recrutadorOriginal) {
+      this.recrutador$ = of({ ...this.recrutadorOriginal }); // Restaura os dados originais
+    }
     this.editandoPerfil = false;
-    // Recupere os dados originais do recrutador (implemente a lógica de acordo com sua necessidade)
   }
-
 
   gerenciarCandidaturas(vagaId: number) {
     this.router.navigate(['/gerenciar-candidaturas', vagaId]);
