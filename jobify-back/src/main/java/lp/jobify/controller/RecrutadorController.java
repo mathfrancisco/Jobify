@@ -1,13 +1,13 @@
-package lp.jobify.controller;// RecrutadorController.java
+// RecrutadorController.java
 import lp.jobify.model.Recrutador;
 import lp.jobify.repository.RecrutadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/recrutadores")
@@ -18,25 +18,29 @@ public class RecrutadorController {
 
     @GetMapping
     public ResponseEntity<List<Recrutador>> listarRecrutadores() {
-        List<Recrutador> recrutadores = recrutadorRepository.findAll();
-        return ResponseEntity.ok(recrutadores);
+        return ResponseEntity.ok(recrutadorRepository.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Recrutador> buscarRecrutadorPorId(@PathVariable Long id) {
-        Optional<Recrutador> recrutador = recrutadorRepository.findById(id);
-        return recrutador.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+        return recrutadorRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
+
     @GetMapping("/email/{email}")
     public ResponseEntity<Recrutador> buscarRecrutadorPorEmail(@PathVariable String email) {
-        Optional<Recrutador> recrutador = recrutadorRepository.findByEmail(email);
-        return recrutador.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+        return recrutadorRepository.findByEmail(email)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Recrutador> criarRecrutador(@RequestBody Recrutador recrutador) { // Adicionado @RequestBody
+    public ResponseEntity<Recrutador> criarRecrutador(@RequestBody Recrutador recrutador) {
         Recrutador novoRecrutador = recrutadorRepository.save(recrutador);
-        return ResponseEntity.status(HttpStatus.CREATED).body(novoRecrutador);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(novoRecrutador.getId()).toUri();
+        return ResponseEntity.created(location).body(novoRecrutador);
     }
 
     @PutMapping("/{id}")
@@ -45,8 +49,7 @@ public class RecrutadorController {
             return ResponseEntity.notFound().build();
         }
         recrutador.setId(id);
-        Recrutador recrutadorAtualizado = recrutadorRepository.save(recrutador);
-        return ResponseEntity.ok(recrutadorAtualizado);
+        return ResponseEntity.ok(recrutadorRepository.save(recrutador));
     }
 
     @DeleteMapping("/{id}")
