@@ -1,13 +1,13 @@
-package lp.jobify.controller;// VagaController.java
+// VagaController.java
 import lp.jobify.model.Vaga;
 import lp.jobify.repository.VagaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/vagas")
@@ -18,20 +18,22 @@ public class VagaController {
 
     @GetMapping
     public ResponseEntity<List<Vaga>> listarVagas() {
-        List<Vaga> vagas = vagaRepository.findAll();
-        return ResponseEntity.ok(vagas);
+        return ResponseEntity.ok(vagaRepository.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Vaga> buscarVagaPorId(@PathVariable Long id) {
-        Optional<Vaga> vaga = vagaRepository.findById(id);
-        return vaga.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+        return vagaRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
     public ResponseEntity<Vaga> criarVaga(@RequestBody Vaga vaga) {
         Vaga novaVaga = vagaRepository.save(vaga);
-        return ResponseEntity.status(HttpStatus.CREATED).body(novaVaga);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(novaVaga.getId()).toUri();
+        return ResponseEntity.created(location).body(novaVaga);
     }
 
     @PutMapping("/{id}")
@@ -40,8 +42,7 @@ public class VagaController {
             return ResponseEntity.notFound().build();
         }
         vaga.setId(id);
-        Vaga vagaAtualizada = vagaRepository.save(vaga);
-        return ResponseEntity.ok(vagaAtualizada);
+        return ResponseEntity.ok(vagaRepository.save(vaga));
     }
 
     @DeleteMapping("/{id}")
@@ -55,7 +56,6 @@ public class VagaController {
 
     @GetMapping("/recrutador/{recrutadorId}")
     public ResponseEntity<List<Vaga>> listarVagasPorRecrutador(@PathVariable Long recrutadorId) {
-        List<Vaga> vagas = vagaRepository.findByRecrutadorId(recrutadorId);
-        return ResponseEntity.ok(vagas);
+        return ResponseEntity.ok(vagaRepository.findByRecrutadorId(recrutadorId));
     }
 }
