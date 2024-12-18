@@ -1,9 +1,9 @@
 // vaga.ts
-
-import {NgIterable} from '@angular/core';
+import { Recrutador } from './recrutador'; // Importe a interface Recrutador
 
 export interface Vaga {
-  skills: (NgIterable<unknown> & NgIterable<any>) | undefined | null;
+  id: number;
+  skills: string[];
   titulo: string;
   descricao: string;
   empresa: string;
@@ -12,7 +12,6 @@ export interface Vaga {
   tipo: string;
   logo?: string;
   linkAplicacao?: string;
+  recrutador: Recrutador; // Adicione o campo recrutador
 }
-
-
 
