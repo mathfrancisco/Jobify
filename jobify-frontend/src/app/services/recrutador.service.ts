@@ -26,6 +26,23 @@ export class RecrutadorService {
       catchError(_ => of(undefined))
     );
   }
-
-  // ... outros métodos do serviço
+ atualizarRecrutador(recrutador: Recrutador): Observable<Recrutador | undefined> {
+    const url = `${this.apiUrl}/recrutadores/${recrutador.id}`;
+    return this.http.put<Recrutador>(url, recrutador).pipe(
+      map(recrutadorAtualizado => {
+        if (recrutadorAtualizado) {
+          return recrutadorAtualizado;
+        } else {
+          console.error("Não foi possível atualizar o recrutador.");
+          return undefined; // Ou lance um erro, se preferir
+        }
+      }),
+      catchError(error => {
+        console.error('Erro ao atualizar recrutador:', error);
+        return of(undefined); // Retorna undefined em caso de erro
+      })
+    );
+  }
 }
+  // ... outros métodos do serviço
+
