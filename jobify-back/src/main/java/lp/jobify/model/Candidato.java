@@ -10,7 +10,10 @@ public class Candidato {
 
     private String nome;
     private String email;
-    private String habilidades;
+    
+    @ElementCollection
+    private List<String> habilidades;
+
     private String cargo;
     private String senha;
 
@@ -49,11 +52,11 @@ public class Candidato {
         this.email = email;
     }
 
-    public String getHabilidades() {
+    public List<String> getHabilidades() {
         return habilidades;
     }
 
-    public void setHabilidades(String habilidades) {
+    public void setHabilidades(List<String> habilidades) {
         this.habilidades = habilidades;
     }
 
