@@ -8,12 +8,14 @@ import lp.jobify.repository.RecrutadorRepository;
 import lp.jobify.repository.VagaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+@Component
 @Profile("dev")
 public class DataInitializer implements CommandLineRunner {
 
