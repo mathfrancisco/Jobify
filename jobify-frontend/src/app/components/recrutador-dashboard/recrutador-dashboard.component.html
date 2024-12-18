@@ -36,19 +36,32 @@
         </div>
       </div>
 
-      <div *ngIf="editandoPerfil" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Formulário para editar perfil -->
-        <div>
-          <label for="nome" class="block text-gray-300 font-medium mb-2">Nome:</label>
-          <input id="nome" type="text" [(ngModel)]="recrutador.nome" class="w-full bg-white/10 border border-gray-600 text-white py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232]">
-        </div>
-        <!-- ... outros campos do formulário -->
-        <div class="md:col-span-2 mt-4">
-          <button (click)="editarPerfil()" class="bg-green-500 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors mr-2">Salvar</button>
-          <button (click)="cancelarEdicao()" class="bg-gray-500 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors">Cancelar</button>
-        </div>
-      </div>
-    </div>
+     <div *ngIf="editandoPerfil" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div>
+    <label for="nome" class="block text-gray-300 font-medium mb-2">Nome:</label>
+    <input id="nome" type="text" [(ngModel)]="recrutador.nome" class="w-full bg-white/10 border border-gray-600 text-white py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232]">
+  </div>
+  <div>
+    <label for="email" class="block text-gray-300 font-medium mb-2">Email:</label>
+    <input id="email" type="email" [(ngModel)]="recrutador.email" class="w-full bg-white/10 border border-gray-600 text-white py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232]">
+  </div>
+  <div>
+    <label for="empresa" class="block text-gray-300 font-medium mb-2">Empresa:</label>
+    <input id="empresa" type="text" [(ngModel)]="recrutador.empresa" class="w-full bg-white/10 border border-gray-600 text-white py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232]">
+  </div>
+  <div>
+    <label for="site" class="block text-gray-300 font-medium mb-2">Site:</label>
+    <input id="site" type="text" [(ngModel)]="recrutador.site" class="w-full bg-white/10 border border-gray-600 text-white py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232]">
+  </div>
+  <div class="md:col-span-2">
+    <label for="descricao" class="block text-gray-300 font-medium mb-2">Descrição:</label>
+    <textarea id="descricao" [(ngModel)]="recrutador.descricao" class="w-full bg-white/10 border border-gray-600 text-white py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232]"></textarea>
+  </div>
+  <div class="md:col-span-2 mt-4">
+    <button (click)="editarPerfil()" class="bg-green-500 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors mr-2">Salvar</button>
+    <button (click)="cancelarEdicao()" class="bg-gray-500 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors">Cancelar</button>
+  </div>
+</div>
 
     <div *ngIf="!recrutador && !carregandoRecrutador" class="text-center text-white mt-10">
       <p>Recrutador não encontrado.</p>
