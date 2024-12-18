@@ -1,4 +1,4 @@
-// CandidatoRepository.java
+package lp.jobify.repository;// CandidatoRepository.java
 import lp.jobify.model.Candidato;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

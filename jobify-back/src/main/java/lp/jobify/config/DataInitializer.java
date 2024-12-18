@@ -3,6 +3,7 @@ package lp.jobify.config;
 import lp.jobify.model.Candidato;
 import lp.jobify.model.Recrutador;
 import lp.jobify.model.Vaga;
+
 import lp.jobify.repository.CandidatoRepository;
 import lp.jobify.repository.RecrutadorRepository;
 import lp.jobify.repository.VagaRepository;
@@ -30,9 +31,9 @@ public class DataInitializer implements CommandLineRunner {
         if (candidatoRepository.count() == 0 && recrutadorRepository.count() == 0 && vagaRepository.count() == 0) {
 
             List<Candidato> candidatos = List.of(
-    new Candidato("João Silva", "joao.silva@email.com", List.of("Java", "Spring Boot", "Microservices"), "Desenvolvedor Java Sênior", "senha123"),
-                    new Candidato("Maria Souza", "maria.souza@email.com", List.of("Python, Machine Learning, Data Analysis"), "Cientista de Dados", "senha456"),
-                    new Candidato("Pedro Santos", "pedro.santos@email.com", List.of("React, Angular, JavaScript", "Desenvolvedor Front-End"), "senha789")
+                    new Candidato("João Silva", "joao.silva@email.com", List.of("Java", "Spring Boot", "Microservices").toString(), "Desenvolvedor Java Sênior", "senha123"),
+                    new Candidato("Maria Souza", "maria.souza@email.com", List.of("Python", "Machine Learning", "Data Analysis").toString(), "Cientista de Dados", "senha456"),
+                    new Candidato("Pedro Santos", "pedro.santos@email.com", List.of("React", "Angular", "JavaScript").toString(), "Desenvolvedor Front-End", "senha789")
             );
             candidatoRepository.saveAll(candidatos);
 

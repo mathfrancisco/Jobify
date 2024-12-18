@@ -1,4 +1,4 @@
-// RecrutadorController.java
+package lp.jobify.controller;// RecrutadorController.java
 import lp.jobify.model.Recrutador;
 import lp.jobify.repository.RecrutadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;

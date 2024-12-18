@@ -1,6 +1,10 @@
 package lp.jobify.model;// Candidato.java
 import jakarta.persistence.*;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 @Entity
 public class Candidato {
 
@@ -22,7 +26,7 @@ public class Candidato {
     public Candidato(String nome, String email, String habilidades, String cargo, String senha) {
         this.nome = nome;
         this.email = email;
-        this.habilidades = habilidades;
+        this.habilidades = Arrays.asList(habilidades);
         this.cargo = cargo;
         this.senha = senha;
     }
