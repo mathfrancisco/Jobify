@@ -7,6 +7,7 @@ import { Recrutador } from '../../models/recrutador';
 import { Vaga } from '../../models/vaga'; // Importe o modelo Vaga
 import { VagaService } from '../../services/vaga.service'; // Importe o VagaService
 import { Observable, map } from 'rxjs'; // Importe o Observable
+import { Router } from '@angular/router'; // Importe o Router
 
 
 
@@ -25,7 +26,8 @@ export class RecrutadorDashboardComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private recrutadorService: RecrutadorService,
-    private vagaService: VagaService // Injete o VagaService
+    private vagaService: VagaService,
+    private router: Router // Injete o Router
   ) {}
 
   ngOnInit(): void {
@@ -59,5 +61,48 @@ export class RecrutadorDashboardComponent implements OnInit {
         }
       });
     }
+  }
+ criarNovaVaga() {
+    // Navegar para a página de criação de vaga, passando o ID do recrutador
+    if (this.recrutador) {
+      this.router.navigate(['/criar-vaga', this.recrutador.id]);
+    } else {
+      // Tratar o caso em que o recrutador não está definido
+      console.error("Recrutador não definido. Não é possível criar uma vaga.");
+    }
+  }
+
+  editarPerfil() {
+    if (!this.recrutador) return;
+
+    if (this.editandoPerfil) {
+      // Salvar as alterações
+      this.recrutadorService.atualizarRecrutador(this.recrutador).subscribe({
+        next: (recrutadorAtualizado) => {
+          this.recrutador = recrutadorAtualizado;
+          this.originalRecrutador = { ...this.recrutador };
+          this.editandoPerfil = false;
+        },
+        error: (error) => {
+          console.error('Erro ao atualizar recrutador:', error);
+          // Implementar tratamento de erro
+        }
+      });
+    } else {
+      // Entrar no modo de edição
+      this.originalRecrutador = { ...this.recrutador };
+      this.editandoPerfil = true;
+    }
+  }
+
+  cancelarEdicao() {
+    if (!this.originalRecrutador) return;
+    this.recrutador = { ...this.originalRecrutador };
+    this.editandoPerfil = false;
+  }
+
+  gerenciarCandidaturas(vagaId: number) {
+    // Navegar para a página de gerenciamento de candidaturas, passando o ID da vaga
+    this.router.navigate(['/gerenciar-candidaturas', vagaId]);
   }
 }
