@@ -6,6 +6,11 @@ import { CandidatoService } from '../../services/candidato.service';
 import { Candidato } from '../../models/candidato';
 import { Observable,of, map } from 'rxjs';
 
+interface Candidatura { // Nova interface
+  vaga: { titulo: string };
+  status: string;
+  dataAplicacao: Date;
+}
 
 @Component({
   selector: 'app-candidato-dashboard',
@@ -33,6 +38,15 @@ export class CandidatoDashboardComponent implements OnInit {
     { titulo: 'DevOps Engineer', empresa: 'Empresa J', localizacao: 'Florianópolis' }
 
   ];
+   candidaturas: Candidatura[] = [ // Dados mockados
+    { vaga: { titulo: 'Desenvolvedor Front-end' }, status: 'Em análise', dataAplicacao: new Date() },
+    { vaga: { titulo: 'Engenheiro de Software' }, status: 'Entrevista agendada', dataAplicacao: new Date() },
+  ];
+
+   editarPerfil() {
+    // Lógica para editar o perfil (navegar para uma página de edição, abrir um modal, etc.)
+    console.log("Editar perfil..."); // Placeholder
+  }
 
   constructor(
     private route: ActivatedRoute,
