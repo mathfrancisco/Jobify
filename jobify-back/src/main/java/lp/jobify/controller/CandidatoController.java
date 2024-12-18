@@ -1,16 +1,16 @@
-package lp.jobify.controller;// CandidatoController.java
+// CandidatoController.java
 import lp.jobify.model.Candidato;
 import lp.jobify.repository.CandidatoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/candidatos") // Ajustado o caminho
+@RequestMapping("/api/candidatos")
 public class CandidatoController {
 
     @Autowired
@@ -18,25 +18,29 @@ public class CandidatoController {
 
     @GetMapping
     public ResponseEntity<List<Candidato>> listarCandidatos() {
-        List<Candidato> candidatos = candidatoRepository.findAll();
-        return ResponseEntity.ok(candidatos);
+        return ResponseEntity.ok(candidatoRepository.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Candidato> buscarCandidatoPorId(@PathVariable Long id) {
-        Optional<Candidato> candidato = candidatoRepository.findById(id);
-        return candidato.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+        return candidatoRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
-    @GetMapping("/email/{email}") // Novo endpoint
+
+    @GetMapping("/email/{email}")
     public ResponseEntity<Candidato> buscarCandidatoPorEmail(@PathVariable String email) {
-        Optional<Candidato> candidato = candidatoRepository.findByEmail(email); // findByEmail no repository
-        return candidato.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+        return candidatoRepository.findByEmail(email)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
     public ResponseEntity<Candidato> criarCandidato(@RequestBody Candidato candidato) {
         Candidato novoCandidato = candidatoRepository.save(candidato);
-        return ResponseEntity.status(HttpStatus.CREATED).body(novoCandidato);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(novoCandidato.getId()).toUri();
+        return ResponseEntity.created(location).body(novoCandidato);
     }
 
     @PutMapping("/{id}")
@@ -44,10 +48,8 @@ public class CandidatoController {
         if (!candidatoRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-
-        candidato.setId(id); // Garantir que o ID seja o mesmo
-        Candidato candidatoAtualizado = candidatoRepository.save(candidato);
-        return ResponseEntity.ok(candidatoAtualizado);
+        candidato.setId(id);
+        return ResponseEntity.ok(candidatoRepository.save(candidato));
     }
 
     @DeleteMapping("/{id}")
@@ -55,7 +57,6 @@ public class CandidatoController {
         if (!candidatoRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-
         candidatoRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
