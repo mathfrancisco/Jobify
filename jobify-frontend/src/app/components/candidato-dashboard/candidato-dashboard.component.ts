@@ -1,13 +1,15 @@
 // candidato-dashboard.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router'; // Importe o Router
 import { CandidatoService } from '../../services/candidato.service';
 import { Candidato } from '../../models/candidato';
-import { Observable,of, map } from 'rxjs';
+import { Observable, of, switchMap, combineLatest } from 'rxjs';
+import { VagaService } from '../../services/vaga.service';
+import { Vaga } from '../../models/vaga';
 
-interface Candidatura { // Nova interface
-  vaga: { titulo: string };
+interface Candidatura {
+  vaga: Vaga;
   status: string;
   dataAplicacao: Date;
 }
@@ -21,49 +23,78 @@ interface Candidatura { // Nova interface
 })
 export class CandidatoDashboardComponent implements OnInit {
   candidato$: Observable<Candidato | undefined> = of(undefined);
-  // Mock data for Vagas and Vagas Recomendadas
-  vagas: any[] = [
-    { titulo: 'Desenvolvedor Front-end', empresa: 'Empresa A', localizacao: 'Remoto' },
-    { titulo: 'Engenheiro de Software', empresa: 'Empresa B', localizacao: 'São Paulo' },
-    { titulo: 'Analista de Dados', empresa: 'Empresa C', localizacao: 'Rio de Janeiro' },
-    { titulo: 'Especialista em UX/UI', empresa: 'Empresa D', localizacao: 'Belo Horizonte' },
-    { titulo: 'Desenvolvedor Mobile', empresa: 'Empresa E', localizacao: 'Porto Alegre' }
-  ];
-
-  vagasRecomendadas: any[] = [
-    { titulo: 'Desenvolvedor Full-stack', empresa: 'Empresa F', localizacao: 'Remoto' },
-    { titulo: 'Especialista em Angular', empresa: 'Empresa G', localizacao: 'São Paulo' },
-    { titulo: 'Arquiteto de Software', empresa: 'Empresa H', localizacao: 'Rio de Janeiro' },
-    { titulo: 'Cientista de Dados', empresa: 'Empresa I', localizacao: 'Campinas' },
-    { titulo: 'DevOps Engineer', empresa: 'Empresa J', localizacao: 'Florianópolis' }
-
-  ];
-   candidaturas: Candidatura[] = [ // Dados mockados
-    { vaga: { titulo: 'Desenvolvedor Front-end' }, status: 'Em análise', dataAplicacao: new Date() },
-    { vaga: { titulo: 'Engenheiro de Software' }, status: 'Entrevista agendada', dataAplicacao: new Date() },
-  ];
-
-   editarPerfil() {
-    // Lógica para editar o perfil (navegar para uma página de edição, abrir um modal, etc.)
-    console.log("Editar perfil..."); // Placeholder
-  }
+  vagas: Vaga[] = [];
+  vagasRecomendadas: Vaga[] = [];
+  candidaturas: Candidatura[] = [];
 
   constructor(
     private route: ActivatedRoute,
-    private candidatoService: CandidatoService
+    private router: Router, // Injete o Router
+    private candidatoService: CandidatoService,
+    private vagaService: VagaService
   ) {}
 
   ngOnInit(): void {
-    const routeParams = this.route.snapshot.paramMap; // Use snapshot.paramMap
-    const candidatoIdString = routeParams.get('id'); // Recupere o ID como string
-    console.log("candidatoIdString:", candidatoIdString); // Debug
+    this.candidato$ = this.route.paramMap.pipe(
+      map(params => Number(params.get('id'))),
+      switchMap(id => {
+        if (id) {
+          return this.candidatoService.getCandidatoById(id);
+        } else {
+          console.error("ID do candidato não encontrado na rota.");
+          return of(undefined);
+        }
+      })
+    );
 
-    if (candidatoIdString) {
-      const candidatoId = Number(candidatoIdString); // Converta para número APENAS se existir
-      console.log("candidatoId:", candidatoId); // Debug
-      this.candidato$ = this.candidatoService.getCandidatoById(candidatoId);
-    } else {
-      console.error("ID do candidato não encontrado na rota.");
-    }
+    // Buscar vagas e candidaturas
+    this.candidato$.subscribe(candidato => {
+      if (candidato) {
+        // Buscar todas as vagas
+        this.vagaService.getVagas().subscribe(vagas => {
+          this.vagas = vagas;
+
+          // Simular a busca de candidaturas (substitua pela lógica real)
+          this.candidaturas = this.vagas.slice(0, 2).map(vaga => ({
+            vaga: vaga,
+            status: ['Em análise', 'Entrevista agendada', 'Aprovado', 'Rejeitado'][Math.floor(Math.random() * 4)],
+            dataAplicacao: new Date()
+          }));
+
+          // Recomendar vagas com base nas habilidades do candidato (substitua pela lógica real)
+          this.vagasRecomendadas = this.vagas.filter(vaga =>
+            vaga.skills.some(skill => candidato.habilidades.includes(skill))
+          );
+        });
+
+
+      }
+    });
+  }
+
+  editarPerfil() {
+    this.candidato$.subscribe(candidato => {
+      if (candidato) {
+        // Navegar para a página de edição de perfil, passando o ID do candidato
+        this.router.navigate(['/candidato', candidato.id, 'editar']);
+      }
+    });
+  }
+
+  candidatarSe(vaga: Vaga) {
+    // Lógica para candidatar-se à vaga
+    console.log(`Candidatar-se à vaga ${vaga.titulo}`);
+
+    this.candidato$.subscribe(candidato => {
+      if (candidato) {
+        // Simular a criação de uma candidatura (substitua pela lógica real)
+        const novaCandidatura: Candidatura = {
+          vaga: vaga,
+          status: 'Em análise',
+          dataAplicacao: new Date()
+        };
+        this.candidaturas.push(novaCandidatura);
+      }
+    });
   }
 }
