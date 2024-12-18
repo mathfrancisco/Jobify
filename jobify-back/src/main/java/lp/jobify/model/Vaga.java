@@ -4,6 +4,7 @@ import lp.jobify.model.Recrutador;
 
 import java.util.Date;
 import java.util.List;
+import java.time.LocalDate;
 
 @Entity
 public class Vaga {
@@ -16,8 +17,9 @@ public class Vaga {
     private String descricao;
     private String empresa;
     private String localizacao;
-    @Temporal(TemporalType.DATE)
-    private Date dataPublicacao;
+    
+    private LocalDate dataPublicacao; // Mude o tipo para LocalDate
+    
     private String tipo;
     private String logo;
     private String linkAplicacao;
@@ -30,7 +32,7 @@ public class Vaga {
 
     public Vaga() { }
 
-    public Vaga(String titulo, String descricao, String empresa, String localizacao, Date dataPublicacao, String tipo, String logo, String linkAplicacao, List<String> skills) {
+    public Vaga(String titulo, String descricao, Recrutador recrutador, String localizacao, LocalDate dataPublicacao, String tipo, String logo, String linkAplicacao, List<String> skills) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.empresa = empresa;
@@ -92,11 +94,11 @@ public class Vaga {
         this.localizacao = localizacao;
     }
 
-    public Date getDataPublicacao() {
+     public LocalDate getDataPublicacao() {
         return dataPublicacao;
     }
 
-    public void setDataPublicacao(Date dataPublicacao) {
+      public void setDataPublicacao(LocalDate dataPublicacao) {
         this.dataPublicacao = dataPublicacao;
     }
 
