@@ -7,6 +7,8 @@ import { Candidato } from '../../models/candidato';
 import {Observable, of, switchMap, combineLatest, map} from 'rxjs';
 import { VagaService } from '../../services/vaga.service';
 import { Vaga } from '../../models/vaga';
+import { CandidaturaService } from '../../services/candidatura.service'; // Importe o serviço
+import { Candidatura } from '../../models/candidatura'; 
 
 interface Candidatura {
   vaga: Vaga;
@@ -33,7 +35,8 @@ export class CandidatoDashboardComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router, // Injete o Router
     private candidatoService: CandidatoService,
-    private vagaService: VagaService
+    private vagaService: VagaService,
+    private candidaturaService: CandidaturaService
   ) {}
 
   ngOnInit(): void {
@@ -84,18 +87,27 @@ export class CandidatoDashboardComponent implements OnInit {
   }
 
   candidatarSe(vaga: Vaga) {
-    // Lógica para candidatar-se à vaga
-    console.log(`Candidatar-se à vaga ${vaga.titulo}`);
-
     this.candidato$.subscribe(candidato => {
       if (candidato) {
-        // Simular a criação de uma candidatura (substitua pela lógica real)
         const novaCandidatura: Candidatura = {
           vaga: vaga,
+          candidato: candidato, // Associe o candidato à candidatura
           status: 'Em análise',
-          dataAplicacao: new Date()
+          dataAplicacao: new Date(),
+          skillstexto: vaga.skills.join(', ')
         };
-        this.candidaturas.push(novaCandidatura);
+
+        this.candidaturaService.criarCandidatura(novaCandidatura).subscribe({
+          next: (candidaturaCriada) => {
+            console.log('Candidatura criada com sucesso:', candidaturaCriada);
+            this.candidaturas.push(candidaturaCriada); // Adicione à lista local
+            // Opcional: Exibir uma mensagem de sucesso para o usuário
+          },
+          error: (error) => {
+            console.error('Erro ao criar candidatura:', error);
+            // Exibir uma mensagem de erro para o usuário
+          }
+        });
       }
     });
   }
