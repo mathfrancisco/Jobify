@@ -30,6 +30,9 @@ export class CandidatoDashboardComponent implements OnInit {
   candidaturas: Candidatura[] = [];
   paginaAtual = 0;
   tamanhoPagina = 10;
+  carregandoCandidatura: { [vagaId: number]: boolean } = {}; // Para controlar o loading por vaga
+  mensagemSucesso: string | null = null; // Para exibir a mensagem de sucesso
+
 
   constructor(
     private route: ActivatedRoute,
@@ -87,6 +90,7 @@ export class CandidatoDashboardComponent implements OnInit {
   }
 
   candidatarSe(vaga: Vaga) {
+    this.carregandoCandidatura[vaga.id] = true; // Inicia o loading
     this.candidato$.subscribe(candidato => {
       if (candidato) {
         const novaCandidatura: Candidatura = {
@@ -97,14 +101,19 @@ export class CandidatoDashboardComponent implements OnInit {
           skillstexto: vaga.skills.join(', ')
         };
 
-        this.candidaturaService.criarCandidatura(novaCandidatura).subscribe({
+         this.candidaturaService.criarCandidatura(novaCandidatura).subscribe({
           next: (candidaturaCriada) => {
             console.log('Candidatura criada com sucesso:', candidaturaCriada);
-            this.candidaturas.push(candidaturaCriada); // Adicione à lista local
-            // Opcional: Exibir uma mensagem de sucesso para o usuário
+            this.candidaturas.push(candidaturaCriada); // Atualiza a lista local
+            this.carregandoCandidatura[vaga.id] = false; // Para o loading
+            this.mensagemSucesso = `Candidatura para ${vaga.titulo} enviada com sucesso!`; // Define a mensagem de sucesso
+         setTimeout(() => {
+              this.mensagemSucesso = null; // Limpa a mensagem após um tempo
+            }, 5000); // 5 segundos
           },
           error: (error) => {
             console.error('Erro ao criar candidatura:', error);
+            this.carregandoCandidatura[vaga.id] = false; // Para o loading
             // Exibir uma mensagem de erro para o usuário
           }
         });
