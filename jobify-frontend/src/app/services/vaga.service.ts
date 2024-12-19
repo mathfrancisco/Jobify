@@ -12,7 +12,7 @@ export class VagaService {
 
   constructor(private http: HttpClient) { }
 
-  getVagas(): Observable<Vaga[]> {
+  getVagas(paginaAtual: number, tamanhoPagina: number): Observable<Vaga[]> {
     return this.http.get<Vaga[]>(`${this.apiUrl}/vagas`).pipe(
       map((vagas: Vaga[]) => { // Use map para transformar as vagas
         return vagas.map(vaga => ({

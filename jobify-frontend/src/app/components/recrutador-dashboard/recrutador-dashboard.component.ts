@@ -7,11 +7,12 @@ import { Recrutador } from '../../models/recrutador';
 import { Vaga } from '../../models/vaga';
 import { VagaService } from '../../services/vaga.service';
 import { Observable, of, switchMap, map } from 'rxjs';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-recrutador-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './recrutador-dashboard.component.html',
   styleUrls: ['./recrutador-dashboard.component.css']
 })

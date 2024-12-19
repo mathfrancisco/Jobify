@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router'; // Importe o Router
 import { CandidatoService } from '../../services/candidato.service';
 import { Candidato } from '../../models/candidato';
-import { Observable, of, switchMap, combineLatest } from 'rxjs';
+import {Observable, of, switchMap, combineLatest, map} from 'rxjs';
 import { VagaService } from '../../services/vaga.service';
 import { Vaga } from '../../models/vaga';
 
@@ -26,6 +26,8 @@ export class CandidatoDashboardComponent implements OnInit {
   vagas: Vaga[] = [];
   vagasRecomendadas: Vaga[] = [];
   candidaturas: Candidatura[] = [];
+  paginaAtual = 0;
+  tamanhoPagina = 10;
 
   constructor(
     private route: ActivatedRoute,
@@ -51,7 +53,7 @@ export class CandidatoDashboardComponent implements OnInit {
     this.candidato$.subscribe(candidato => {
       if (candidato) {
         // Buscar todas as vagas
-        this.vagaService.getVagas().subscribe(vagas => {
+        this.vagaService.getVagas(this.paginaAtual, this.tamanhoPagina).subscribe(vagas => {
           this.vagas = vagas;
 
           // Simular a busca de candidaturas (substitua pela lógica real)
