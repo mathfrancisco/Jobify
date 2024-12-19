@@ -1,0 +1,46 @@
+<!-- criar-vaga.component.html -->
+<div class="container mx-auto px-4 py-8">
+  <h2 class="text-3xl font-bold text-white mb-6">Criar Nova Vaga</h2>
+
+  <form (ngSubmit)="criarVaga()">
+    <div class="mb-4">
+      <label for="titulo" class="block text-gray-300 font-medium mb-2">Título:</label>
+      <input type="text" id="titulo" name="titulo" [(ngModel)]="novaVaga.titulo" class="w-full bg-white/10 border border-gray-600 text-white py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232]" required>
+    </div>
+
+    <div class="mb-4">
+      <label for="descricao" class="block text-gray-300 font-medium mb-2">Descrição:</label>
+      <textarea id="descricao" name="descricao" [(ngModel)]="novaVaga.descricao" class="w-full bg-white/10 border border-gray-600 text-white py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232]" required></textarea>
+    </div>
+
+    <div class="mb-4">
+      <label for="empresa" class="block text-gray-300 font-medium mb-2">Empresa:</label>
+      <input type="text" id="empresa" name="empresa" [(ngModel)]="novaVaga.empresa" class="w-full bg-white/10 border border-gray-600 text-white py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232]" required>
+    </div>
+
+    <div class="mb-4">
+      <label for="localizacao" class="block text-gray-300 font-medium mb-2">Localização:</label>
+      <input type="text" id="localizacao" name="localizacao" [(ngModel)]="novaVaga.localizacao" class="w-full bg-white/10 border border-gray-600 text-white py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232]" required>
+    </div>
+
+    <div class="mb-4">
+      <label for="tipo" class="block text-gray-300 font-medium mb-2">Tipo:</label>
+      <select id="tipo" name="tipo" [(ngModel)]="novaVaga.tipo" class="w-full bg-white/10 border border-gray-600 text-white py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232]" required>
+        <option value="Full-time">Full-time</option>
+        <option value="Part-time">Part-time</option>
+        <option value="Estágio">Estágio</option>
+        <!-- Adicione mais opções conforme necessário -->
+      </select>
+    </div>
+
+    <div class="mb-4">
+      <label for="skills" class="block text-gray-300 font-medium mb-2">Habilidades (separadas por vírgula):</label>
+      <input type="text" id="skills" name="skills" [(ngModel)]="novaVaga.skillsTexto" class="w-full bg-white/10 border border-gray-600 text-white py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232]" required>
+    </div>
+
+
+    <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+      Criar Vaga
+    </button>
+  </form>
+</div>

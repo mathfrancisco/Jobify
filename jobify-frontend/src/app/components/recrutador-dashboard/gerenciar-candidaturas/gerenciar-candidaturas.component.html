@@ -1,0 +1,36 @@
+<div class="container mx-auto px-4 py-8">
+  <h2 class="text-3xl font-bold text-white mb-6">Gerenciar Candidaturas - Vaga {{ vagaId }}</h2>
+
+  <div *ngIf="candidaturas.length > 0; else semCandidaturas">
+    <ul class="bg-white/10 backdrop-blur-md rounded-xl p-6">
+      <li *ngFor="let candidatura of candidaturas" class="border-b border-gray-700 py-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-xl font-semibold text-white">{{ candidatura.candidato.nome }}</h3>
+            <p class="text-gray-400">{{ candidatura.dataAplicacao | date }}</p>
+          </div>
+          <div>
+            <p class="text-white font-medium">{{ candidatura.status }}</p>
+          </div>
+        </div>
+        <div class="mt-2">
+          <a [href]="candidatura.candidato.curriculo" target="_blank" *ngIf="candidatura.candidato.curriculo" class="text-[#86C232] hover:underline">Ver currículo</a>
+        </div>
+        <div class="mt-4">
+          <button class="bg-green-500 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded mr-2"
+                  (click)="atualizarStatus(candidatura, 'Aprovado')">Aprovar</button>
+
+          <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-semibold py-2 px-4 rounded mr-2"
+                  (click)="atualizarStatus(candidatura, 'Entrevista agendada')">Agendar Entrevista</button>
+
+          <button class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded"
+                  (click)="atualizarStatus(candidatura, 'Rejeitado')">Rejeitar</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <ng-template #semCandidaturas>
+    <p class="text-white">Não há candidaturas para esta vaga.</p>
+  </ng-template>
+</div>

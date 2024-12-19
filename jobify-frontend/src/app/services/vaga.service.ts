@@ -43,4 +43,22 @@ export class VagaService {
       })
     );
   }
+
+  criarVaga(vaga: Vaga): Observable<Vaga> {
+    // Converter o array de strings de habilidades para uma única string separada por vírgulas
+    const skillsString = vaga.skills.join(',');
+    const vagaData = { ...vaga, skills: skillsString }; // Cria um novo objeto com a string de skills
+
+    return this.http.post<Vaga>(`${this.apiUrl}/vagas`, vagaData).pipe(
+      map(vagaCriada => ({
+        ...vagaCriada,
+        id: Number(vagaCriada.id),
+        dataPublicacao: new Date(vagaCriada.dataPublicacao)
+      })),
+      catchError(error => {
+        console.error('Erro ao criar vaga:', error);
+        return throwError(() => new Error('Erro ao criar vaga.'));
+      })
+    );
+  }
 }

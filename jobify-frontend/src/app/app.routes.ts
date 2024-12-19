@@ -48,6 +48,21 @@ export const routes: Routes = [
     title: 'Jobify - Recrutador Dashboard'
   },
   {
+    path: 'criar-vaga/:id', // :id é o parâmetro para o ID do recrutador
+    loadComponent: () => import('./components/recrutador-dashboard/criar-vaga/criar-vaga.component').then(c => c.CriarVagaComponent),
+    title: 'Jobify - Criar Vaga'
+  },
+  {
+    path: 'gerenciar-candidaturas/:id', // :id é o parâmetro para o ID da vaga
+    loadComponent: () => import('./components/recrutador-dashboard/gerenciar-candidaturas/gerenciar-candidaturas.component').then(c => c.GerenciarCandidaturasComponent),
+    title: 'Jobify - Gerenciar Candidaturas'
+  },
+    //{
+   // path: 'candidato/:id/editar',
+   // loadComponent: () => import('./components/editar-candidato/editar-candidato.component').then(c => c.EditarCandidatoComponent),
+   // title: 'Jobify - Editar Perfil'
+  //},
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'
