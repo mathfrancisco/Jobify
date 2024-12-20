@@ -1,7 +1,7 @@
 // vaga.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, throwError, map } from 'rxjs'; // Importe o 'map'
+import {Observable, catchError, throwError, map, of} from 'rxjs'; // Importe o 'map'
 import { Vaga } from '../models/vaga';
 
 @Injectable({
@@ -58,6 +58,15 @@ export class VagaService {
       catchError(error => {
         console.error('Erro ao criar vaga:', error);
         return throwError(() => new Error('Erro ao criar vaga.'));
+      })
+    );
+  }
+  getVagaById(id: number): Observable<Vaga | undefined> {
+    return this.http.get<Vaga>(`${this.apiUrl}/vagas/${id}`).pipe(
+      map(vaga => ({ ...vaga, id: Number(vaga.id), dataPublicacao: new Date(vaga.dataPublicacao) })),
+      catchError(error => {
+        console.error('Erro ao buscar vaga por ID:', error);
+        return of(undefined); // Retorna undefined se a vaga não for encontrada
       })
     );
   }

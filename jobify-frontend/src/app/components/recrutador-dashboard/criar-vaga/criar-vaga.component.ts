@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+// criar-vaga.component.ts
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { VagaService } from '../../../services/vaga.service';
 import { Vaga } from '../../../models/vaga';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Recrutador } from '../../../models/recrutador';
-import { switchMap, map } from 'rxjs';
+import { Candidatura } from '../../../models/candidatura'; // Importe a interface Recrutador
+import { switchMap, map, of, catchError } from 'rxjs';
 
 @Component({
   selector: 'app-criar-vaga',
@@ -14,9 +15,9 @@ import { switchMap, map } from 'rxjs';
   templateUrl: './criar-vaga.component.html',
   styleUrls: ['./criar-vaga.component.css']
 })
-export class CriarVagaComponent {
+export class CriarVagaComponent implements OnInit {
   novaVaga: Vaga = {
-    id: 0, // ou null, dependendo da sua API
+    id: 0,
     skills: [],
     titulo: '',
     descricao: '',
@@ -24,9 +25,11 @@ export class CriarVagaComponent {
     localizacao: '',
     dataPublicacao: new Date(),
     tipo: '',
-    recrutador: { id: 0, nome: '', email: '', empresa: '', senha: '' } // Precisa ser inicializado
+    recrutador: { id: 0, nome: '', email: '', empresa: '', senha: '' },
+    logo: '', // Inicialize logo e linkAplicacao
+    linkAplicacao: ''
   };
-  recrutadorId: number | null = null;
+  recrutadorId!: number; // Remova a inicialização nula
   skillsTexto: string = '';
 
   constructor(
@@ -39,38 +42,46 @@ export class CriarVagaComponent {
     this.route.paramMap.pipe(
       map(params => Number(params.get('id'))),
       switchMap(id => {
-        if (id) {
-          this.recrutadorId = id;
-          return this.vagaService.getVagasPorRecrutador(id); // Ou outro método para obter dados do recrutador
-        } else {
-          // Lide com o caso em que o ID não é encontrado
-          console.error("ID do recrutador não encontrado na URL");
-          return []; // Retorna um array vazio para evitar erros no template
+        if (isNaN(id)) {
+          console.error("ID do recrutador inválido.");
+          this.router.navigate(['/']); // Redireciona para a página inicial ou de erro
+          return of(null);
         }
+        this.recrutadorId = id;
+        this.novaVaga.recrutador.id = this.recrutadorId; // Define o ID do recrutador imediatamente
+        return of(null); // Não precisa retornar nada aqui, já que só precisamos do ID
       })
-    ).subscribe(vagas => {
-      // ... (opcional) faça algo com as vagas do recrutador, se necessário
+    ).subscribe(); // Não precisa fazer nada na inscrição
+  }
+
+  criarVaga() {
+    if (!this.recrutadorId) { // Verifica se o recrutadorId foi definido
+      console.error("Recrutador não definido. Não é possível criar a vaga.");
+      return; // Impede a criação da vaga sem recrutador
+    }
+
+    this.novaVaga.skills = this.skillsTexto.split(',').map(skill => skill.trim());
+    this.vagaService.criarVaga(this.novaVaga).subscribe({
+      next: () => {
+        this.router.navigate(['/recrutador', this.recrutadorId, 'dashboard']);
+      },
+      error: error => {
+        console.error('Erro ao criar vaga:', error);
+        // Lidar com o erro, ex.: exibir uma mensagem para o usuário
+      }
     });
   }
 
-
-  criarVaga() {
+  voltar(): void {
     if (this.recrutadorId) {
-      this.novaVaga.skills = this.skillsTexto.split(',').map(skill => skill.trim());
-      this.novaVaga.recrutador.id = this.recrutadorId; // Define o ID do recrutador na vaga
-      this.vagaService.criarVaga(this.novaVaga).subscribe({
-        next: vagaCriada => {
-          // Redirecionar para o dashboard do recrutador após criar a vaga
-          this.router.navigate(['/recrutador-dashboard', this.recrutadorId]);
-        },
-        error: error => {
-          console.error('Erro ao criar vaga:', error);
-          // Lidar com o erro, ex.: exibir uma mensagem para o usuário
-        }
-      });
+      this.router.navigate(['/recrutador', this.recrutadorId, 'dashboard']);
     } else {
-      console.error("Não é possível criar uma vaga sem um recrutador associado.");
+      this.router.navigate(['/']); // Ou outra rota padrão
     }
+  }
 
+  cancelar() {
+    this.voltar(); // Reutiliza o método voltar()
   }
 }
+
