@@ -117,10 +117,10 @@
             <input type="text"
                    id="skills"
                    name="skills"
-                   [(ngModel)]="novaVaga.skillsTexto"
-                   placeholder="Ex: JavaScript, React, Node.js"
-                   class="w-full bg-white/10 border border-gray-600 text-white py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232] transition-all"
-                   required>
+                   [(ngModel)]="skillsTexto"
+            placeholder="Ex: JavaScript, React, Node.js"
+            class="w-full bg-white/10 border border-gray-600 text-white py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232] transition-all"
+            required>
             <p class="text-gray-400 text-sm mt-2">
               <i class="fas fa-info-circle mr-1"></i>
               Digite as habilidades separadas por vírgula
@@ -157,9 +157,9 @@
         <p class="text-gray-400">{{novaVaga.empresa}} • {{novaVaga.localizacao}}</p>
         <p class="text-white">{{novaVaga.descricao}}</p>
         <div class="flex flex-wrap gap-2">
-          <span *ngFor="let skill of novaVaga.skillsTexto?.split(',')"
-                class="px-3 py-1 bg-[#86C232]/20 text-[#86C232] rounded-full text-sm">
-            {{skill.trim()}}
+          <span *ngFor="let skill of novaVaga.skills"
+          class="px-3 py-1 bg-[#86C232]/20 text-[#86C232] rounded-full text-sm">
+          {{skill}}  <!-- Não precisa de trim() aqui -->
           </span>
         </div>
       </div>

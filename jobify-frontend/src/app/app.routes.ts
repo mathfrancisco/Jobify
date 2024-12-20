@@ -13,12 +13,12 @@ export const routes: Routes = [
     title: 'Jobify - Contato'
   },
   {
-    path: 'procura-trabalho',
+    path: 'procurar-trabalho', // hífen
     loadComponent: () => import('./components/procura-trabalho/procura-trabalho.component').then(c => c.ProcuraTrabalhoComponent),
     title: 'Jobify - Procurar Trabalho'
   },
   {
-    path: 'procura-candidatos',
+    path: 'procurar-candidatos', // hífen
     loadComponent: () => import('./components/procura-candidatos/procura-candidatos.component').then(c => c.ProcuraCandidatosComponent),
     title: 'Jobify - Procurar Candidatos'
   },

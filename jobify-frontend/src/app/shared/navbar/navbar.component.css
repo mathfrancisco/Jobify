@@ -43,3 +43,22 @@
   transform: scale(0.95);
   transition: opacity 200ms, transform 200ms;
 }
+
+/* Adicione ao seu arquivo de estilos */
+.nav-item {
+  @apply relative text-gray-300 hover:text-[#86C232] transition-colors;
+}
+
+.nav-item::after {
+  @apply content-[''] absolute bottom-0 left-0 w-full h-0.5
+  bg-[#86C232] transform scale-x-0 transition-transform;
+}
+
+.nav-item:hover::after {
+  @apply scale-x-100;
+}
+
+.mobile-menu-item {
+  @apply block px-4 py-2 text-gray-300 hover:text-[#86C232]
+  transition-colors hover:bg-white/5;
+}

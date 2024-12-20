@@ -1,63 +1,32 @@
-<!-- navbar.component.html -->
-<nav class="bg-gradient-to-r from-[#112B3C] to-[#1B4965] shadow-lg">
+<nav class="fixed top-0 w-full bg-white/5 backdrop-blur-lg border-b border-white/10 z-50">
   <div class="container mx-auto px-4">
     <div class="flex justify-between items-center h-16">
       <!-- Logo -->
       <div class="flex-shrink-0">
         <a routerLink="/" class="flex items-center">
-          <span class="text-2xl font-bold bg-gradient-to-r from-[#86C232] to-[#95D44A] text-transparent bg-clip-text hover:scale-105 transition-transform">Jobify</span>
+          <span class="text-2xl font-bold text-white">Job<span class="text-[#86C232]">ify</span></span>
         </a>
       </div>
 
       <!-- Navigation Links - Desktop -->
       <div class="hidden md:flex items-center space-x-8">
-        <a routerLink="/" class="nav-link group">
-          <span class="relative">
-            Home
-            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-[#86C232] transform scale-x-0 group-hover:scale-x-100 transition-transform"></span>
-          </span>
-        </a>
-        <a routerLink="/procura-trabalho" class="nav-link group">
-          <span class="relative">
-            Find Jobs
-            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-[#86C232] transform scale-x-0 group-hover:scale-x-100 transition-transform"></span>
-          </span>
-        </a>
-        <a routerLink="/procura-candidatos" class="nav-link group">
-          <span class="relative">
-            Find Candidates
-            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-[#86C232] transform scale-x-0 group-hover:scale-x-100 transition-transform"></span>
-          </span>
-        </a>
-        <a routerLink="/blog" class="nav-link group">
-          <span class="relative">
-            Blog
-            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-[#86C232] transform scale-x-0 group-hover:scale-x-100 transition-transform"></span>
-          </span>
-        </a>
-        <a routerLink="/como-funciona" class="nav-link group">
-          <span class="relative">
-            How It Works
-            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-[#86C232] transform scale-x-0 group-hover:scale-x-100 transition-transform"></span>
-          </span>
-        </a>
+        <div class="flex gap-6">
+          <a routerLink="/procurar-trabalho" class="nav-link group">Find Jobs</a>
+          <a routerLink="/procurar-candidatos" class="nav-link group">Find Candidates</a>
+          <a routerLink="/blog" class="nav-link group">Blog</a>
+          <a routerLink="/como-funciona" class="nav-link group">How It Works</a>
+        </div>
       </div>
 
-      <!-- CTA Button -->
-      <div class="hidden md:flex items-center">
-        <a routerLink="/login" class="mr-4 text-[#86C232] hover:text-white transition-colors">Sign In</a>
-        <a routerLink="/start"
-           class="bg-gradient-to-r from-[#86C232] to-[#95D44A] text-white font-semibold py-2 px-6 rounded-full
-                  hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 flex items-center">
-          Get Started
-          <fa-icon [icon]="faArrowRight" class="ml-2"></fa-icon>
-        </a>
+      <!-- CTA Buttons -->
+      <div class="hidden md:flex items-center space-x-4">
+        <a routerLink="/login" class="text-[#86C232] hover:text-white transition-colors">Sign In</a>
+        <a routerLink="/start" class="gradient-button">Get Started</a>
       </div>
 
       <!-- Mobile Menu Button -->
       <div class="md:hidden">
-        <button (click)="toggleMenu()"
-                class="text-[#86C232] hover:text-white focus:outline-none">
+        <button (click)="toggleMenu()" class="text-[#86C232] hover:text-white focus:outline-none">
           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path *ngIf="!isMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
             <path *ngIf="isMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -67,14 +36,15 @@
     </div>
 
     <!-- Mobile Menu -->
-    <div *ngIf="isMenuOpen" class="md:hidden">
-      <div class="px-2 pt-2 pb-3 space-y-1">
-        <a routerLink="/" class="mobile-nav-link">Home</a>
-        <a routerLink="/procura-trabalho" class="mobile-nav-link">Find Jobs</a>
-        <a routerLink="/procura-candidatos" class="mobile-nav-link">Find Candidates</a>
-        <a routerLink="/blog" class="mobile-nav-link">Blog</a>
-        <a routerLink="/contato" class="mobile-nav-link">Contact</a>
-        <a routerLink="/start" class="mobile-cta">Get Started</a>
+    <div *ngIf="isMenuOpen" class="md:hidden bg-white/10 backdrop-blur-lg mt-2 rounded-lg border border-white/10">
+      <div class="px-4 py-3 space-y-2">
+        <a routerLink="/procurar-trabalho" class="mobile-menu-item">Find Jobs</a>
+        <a routerLink="/procurar-candidatos" class="mobile-menu-item">Find Candidates</a>
+        <a routerLink="/blog" class="mobile-menu-item">Blog</a>
+        <a routerLink="/como-funciona" class="mobile-menu-item">How It Works</a>
+        <div class="border-t border-white/10 my-2"></div>
+        <a routerLink="/login" class="block text-[#86C232] hover:text-white transition-colors py-2">Sign In</a>
+        <a routerLink="/start" class="gradient-button block text-center">Get Started</a>
       </div>
     </div>
   </div>
