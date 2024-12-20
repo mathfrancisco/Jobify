@@ -62,3 +62,17 @@
   @apply block px-4 py-2 text-gray-300 hover:text-[#86C232]
   transition-colors hover:bg-white/5;
 }
+
+/* Estilos dos botões de CTA */
+.cta-button-outline {
+  @apply inline-block px-6 py-2.5 bg-transparent text-[#86C232] font-medium text-xs
+  border border-[#86C232] rounded-full transition-all duration-300
+  hover:bg-[#86C232] hover:text-white hover:shadow-md focus:outline-none;
+}
+
+.cta-button-filled {
+  @apply inline-block px-6 py-2.5 bg-gradient-to-r from-[#86C232] to-[#95D44A]
+  text-white font-medium text-xs leading-tight uppercase rounded-full shadow-lg
+  hover:bg-gradient-to-l hover:from-[#95D44A] hover:to-[#86C232] hover:shadow-xl
+  focus:outline-none focus:ring-0 active:transform active:translate-y-0.5 transition duration-150 ease-in-out;
+}

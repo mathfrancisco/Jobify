@@ -9,7 +9,7 @@ import {
   faUserClock,
   faSearch,
   faBookmark,
-  faArrowDown
+  faArrowDown, faLaptopHouse, faBusinessTime, faMicrochip, faPalette, faBullhorn, faArrowRight
 } from '@fortawesome/free-solid-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { Subject, takeUntil } from 'rxjs';
@@ -82,4 +82,23 @@ export class ProcuraTrabalhoComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
+  getFilterIcon(filter: string) {
+    switch (filter) {
+      case 'Remote':
+        return faLaptopHouse;
+      case 'Full-time':
+        return faBusinessTime;
+      case 'Tech':
+        return faMicrochip;
+      case 'Design':
+        return faPalette;
+      case 'Marketing':
+        return faBullhorn;
+      default:
+        return faSearch; // Ícone padrão
+    }
+  }
+
+  protected readonly faArrowRight = faArrowRight;
 }

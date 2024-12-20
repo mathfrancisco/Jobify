@@ -1,156 +1,177 @@
 <!-- blog.component.html -->
 <div class="min-h-screen bg-gradient-to-b from-[#0A192F] via-[#112B3C] to-[#1B4965]">
-  <!-- Hero Section -->
-  <section class="relative pt-32 pb-20 overflow-hidden">
+  <!-- Enhanced Hero Section -->
+  <section class="relative pt-36 pb-24 overflow-hidden">
     <div class="container mx-auto px-4">
-      <!-- Animated Background Elements -->
-      <div class="absolute inset-0 overflow-hidden opacity-10">
-        <div class="animate-float-slow absolute top-20 left-10 w-64 h-64 rounded-full bg-[#86C232]/20 blur-3xl"></div>
-        <div class="animate-float absolute top-40 right-20 w-96 h-96 rounded-full bg-[#95D44A]/20 blur-3xl"></div>
+      <!-- Animated Gradient Orbs -->
+      <div class="absolute inset-0 overflow-hidden">
+        <div class="animate-float-slow absolute -top-20 -left-20 w-96 h-96 rounded-full bg-[#86C232]/10 blur-3xl"></div>
+        <div class="animate-float absolute -bottom-32 -right-20 w-[40rem] h-[40rem] rounded-full bg-[#95D44A]/10 blur-3xl"></div>
       </div>
 
-      <div class="text-center mb-16 relative">
-        <span class="inline-block px-4 py-2 bg-[#86C232]/10 rounded-full text-[#86C232] font-semibold mb-4">
-          Our Blog
+      <!-- Enhanced Header -->
+      <div class="text-center mb-20 relative animate-fade-in">
+        <span class="inline-block px-6 py-2 bg-[#86C232]/10 rounded-full text-[#86C232] font-semibold mb-6 backdrop-blur-xl border border-[#86C232]/20">
+          Insights Hub
         </span>
-        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
-          Insights &
-          <span class="bg-gradient-to-r from-[#86C232] to-[#95D44A] text-transparent bg-clip-text">
-            Latest News
+        <h1 class="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tight">
+          Explore Our
+          <span class="bg-gradient-to-r from-[#86C232] to-[#95D44A] text-transparent bg-clip-text animate-gradient">
+            Latest Stories
           </span>
         </h1>
-        <p class="text-gray-300 text-xl max-w-3xl mx-auto">
-          Stay updated with the latest trends, career advice, and industry insights
+        <p class="text-gray-300 text-xl max-w-3xl mx-auto leading-relaxed">
+          Dive into expert insights, industry trends, and career-defining strategies
         </p>
       </div>
 
-      <!-- Featured Post -->
-      <div class="mb-20">
-        <div class="bg-white/10 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 hover:transform hover:-translate-y-2 transition-all duration-300">
-          <div class="grid md:grid-cols-2 gap-8">
-            <div class="relative overflow-hidden">
+      <!-- Enhanced Featured Post -->
+      <div class="mb-24">
+        <div class="bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10 hover:border-[#86C232]/30 transform hover:-translate-y-2 transition-all duration-500 shadow-2xl">
+          <div class="grid md:grid-cols-2 gap-0">
+            <div class="relative overflow-hidden aspect-square md:aspect-auto">
               <img [src]="featuredPost.image" [alt]="featuredPost.title"
                    class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-[#0A192F] via-[#0A192F]/50 to-transparent"></div>
             </div>
-            <div class="p-8 md:p-12 flex flex-col justify-center">
-              <div class="flex items-center gap-4 mb-6">
-                <span class="bg-[#86C232]/20 text-[#86C232] text-sm px-3 py-1 rounded-full">
+            <div class="p-8 md:p-12 lg:p-16 flex flex-col justify-center relative">
+              <div class="flex items-center gap-4 mb-8">
+                <span class="bg-[#86C232]/20 text-[#86C232] text-sm px-4 py-1.5 rounded-full border border-[#86C232]/30">
                   {{ featuredPost.category }}
                 </span>
-                <span class="text-gray-400">{{ featuredPost.date | date:'mediumDate' }}</span>
+                <span class="text-gray-400 flex items-center gap-2">
+                  <fa-icon [icon]="faClock"></fa-icon>
+                  {{ featuredPost.readTime }} min read
+                </span>
               </div>
-              <h2 class="text-3xl font-bold text-white mb-4 hover:text-[#86C232] transition-colors">
+              <h2 class="text-3xl lg:text-4xl font-bold text-white mb-6 leading-tight hover:text-[#86C232] transition-colors">
                 {{ featuredPost.title }}
               </h2>
-              <p class="text-gray-300 mb-6 line-clamp-3">
+              <p class="text-gray-300 mb-8 text-lg leading-relaxed">
                 {{ featuredPost.excerpt }}
               </p>
-              <div class="flex items-center gap-4 mb-6">
+              <div class="flex items-center gap-6 mb-8">
                 <img [src]="featuredPost.author.avatar" [alt]="featuredPost.author.name"
-                     class="w-12 h-12 rounded-full">
+                     class="w-14 h-14 rounded-full border-2 border-[#86C232]/30">
                 <div>
-                  <h4 class="text-white font-semibold">{{ featuredPost.author.name }}</h4>
-                  <p class="text-gray-400">{{ featuredPost.author.role }}</p>
+                  <h4 class="text-white font-semibold text-lg">{{ featuredPost.author.name }}</h4>
+                  <p class="text-[#86C232]">{{ featuredPost.author.role }}</p>
                 </div>
               </div>
-              <a href="#" class="inline-flex items-center text-[#86C232] font-medium hover:underline">
-                Read More <fa-icon [icon]="faArrowRight" class="ml-2"></fa-icon>
-              </a>
+              <button class="inline-flex items-center group">
+                <span class="text-[#86C232] font-semibold group-hover:text-white transition-colors">Read Article</span>
+                <fa-icon [icon]="faArrowRight" class="ml-3 transform group-hover:translate-x-2 transition-transform text-[#86C232] group-hover:text-white"></fa-icon>
+              </button>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Filter Section -->
-      <div class="flex flex-wrap justify-center gap-4 mb-12">
+      <!-- Enhanced Category Filter -->
+      <div class="flex flex-wrap justify-center gap-4 mb-16">
         <button *ngFor="let category of categories"
                 (click)="filterByCategory(category)"
                 [class.bg-[#86C232]]="selectedCategory === category"
                 [class.text-white]="selectedCategory === category"
-                class="px-6 py-2 rounded-full text-sm font-medium transition-all duration-300
-               bg-white/10 text-gray-300 hover:bg-[#86C232]/20"
-                [class.bg-[#86C232]]="selectedCategory === category"  >
+                class="px-8 py-3 rounded-xl text-sm font-medium transition-all duration-300
+                       hover:transform hover:-translate-y-1 backdrop-blur-xl
+                       {{selectedCategory === category ? 'bg-[#86C232] shadow-lg' : 'bg-white/5 text-gray-300 hover:bg-[#86C232]/20'}}">
           {{ category }}
         </button>
       </div>
 
-      <!-- Blog Grid -->
+      <!-- Enhanced Blog Grid -->
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div *ngFor="let post of filteredPosts"
-             class="group bg-white/10 backdrop-blur-xl rounded-2xl overflow-hidden hover:transform hover:-translate-y-2 transition-all duration-300 border border-white/10">
+        <article *ngFor="let post of filteredPosts"
+                 class="group bg-white/5 backdrop-blur-xl rounded-2xl overflow-hidden hover:transform hover:-translate-y-2 transition-all duration-500 border border-white/10 hover:border-[#86C232]/30 shadow-lg">
+          <!-- Post Image -->
           <div class="relative overflow-hidden aspect-video">
             <img [src]="post.image" [alt]="post.title"
                  class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            <div class="absolute bottom-4 left-4 right-4">
-              <span class="bg-[#86C232]/20 text-[#86C232] text-sm px-3 py-1 rounded-full">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A192F] via-[#0A192F]/50 to-transparent"></div>
+            <!-- Category Badge -->
+            <div class="absolute bottom-4 left-4">
+              <span class="bg-[#86C232]/20 text-[#86C232] text-sm px-4 py-1.5 rounded-full backdrop-blur-xl border border-[#86C232]/30">
                 {{ post.category }}
               </span>
             </div>
           </div>
-          <div class="p-6">
-            <div class="flex items-center gap-4 mb-4">
+
+          <!-- Post Content -->
+          <div class="p-8">
+            <!-- Author Info -->
+            <div class="flex items-center gap-4 mb-6">
               <img [src]="post.author.avatar" [alt]="post.author.name"
-                   class="w-10 h-10 rounded-full">
+                   class="w-12 h-12 rounded-full border-2 border-[#86C232]/30">
               <div>
-                <h4 class="text-white text-sm font-semibold">{{ post.author.name }}</h4>
+                <h4 class="text-white font-semibold">{{ post.author.name }}</h4>
                 <p class="text-gray-400 text-sm">{{ post.date | date:'mediumDate' }}</p>
               </div>
             </div>
-            <h3 class="text-xl font-bold text-white mb-3 group-hover:text-[#86C232] transition-colors line-clamp-2">
+
+            <!-- Title & Excerpt -->
+            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-[#86C232] transition-colors line-clamp-2">
               {{ post.title }}
             </h3>
             <p class="text-gray-300 mb-6 line-clamp-3">{{ post.excerpt }}</p>
-            <div class="flex items-center justify-between">
-              <a href="#" class="inline-flex items-center text-[#86C232] font-medium hover:underline">
-                Read More <fa-icon [icon]="faArrowRight" class="ml-2"></fa-icon>
-              </a>
+
+            <!-- Footer -->
+            <div class="flex items-center justify-between pt-6 border-t border-white/10">
+              <button class="inline-flex items-center group">
+                <span class="text-[#86C232] font-medium group-hover:text-white transition-colors">Read More</span>
+                <fa-icon [icon]="faArrowRight" class="ml-2 transform group-hover:translate-x-2 transition-transform"></fa-icon>
+              </button>
               <div class="flex items-center gap-4">
-                <button class="text-gray-400 hover:text-[#86C232] transition-colors">
+                <button class="flex items-center gap-2 text-gray-400 hover:text-[#86C232] transition-colors">
                   <fa-icon [icon]="faHeart"></fa-icon>
-                  <span class="ml-1">{{ post.likes }}</span>
+                  <span>{{ post.likes }}</span>
                 </button>
-                <button class="text-gray-400 hover:text-[#86C232] transition-colors">
+                <button class="flex items-center gap-2 text-gray-400 hover:text-[#86C232] transition-colors">
                   <fa-icon [icon]="faComment"></fa-icon>
-                  <span class="ml-1">{{ post.comments }}</span>
+                  <span>{{ post.comments }}</span>
                 </button>
               </div>
             </div>
           </div>
-        </div>
+        </article>
       </div>
 
-      <!-- Load More -->
-      <div class="text-center mt-12">
+      <!-- Enhanced Load More -->
+      <div class="text-center mt-16">
         <button *ngIf="!allPostsLoaded"
                 (click)="loadMore()"
-                class="bg-white/10 text-white px-8 py-3 rounded-xl hover:bg-white/20 transition-all duration-300">
-          Load More Posts
+                class="group bg-white/5 text-white px-8 py-4 rounded-xl hover:bg-[#86C232]/20 transition-all duration-300 backdrop-blur-xl border border-white/10 hover:border-[#86C232]/30">
+          <span class="flex items-center gap-3">
+            Load More Stories
+            <fa-icon [icon]="faArrowDown" class="transform group-hover:translate-y-1 transition-transform"></fa-icon>
+          </span>
         </button>
       </div>
     </div>
   </section>
 
-  <!-- Newsletter Section -->
-  <section class="py-20 relative overflow-hidden">
+  <!-- Enhanced Newsletter Section -->
+  <section class="py-24 relative overflow-hidden">
     <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto bg-gradient-to-r from-[#86C232]/20 to-[#95D44A]/20 backdrop-blur-xl rounded-2xl p-8 md:p-12 border border-white/10">
-        <div class="text-center mb-8">
-          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-            Subscribe to Our Newsletter
+      <div class="max-w-4xl mx-auto bg-gradient-to-r from-[#86C232]/10 to-[#95D44A]/10 backdrop-blur-xl rounded-3xl p-12 border border-white/10 hover:border-[#86C232]/30 transition-all duration-300 shadow-2xl">
+        <div class="text-center mb-10">
+          <span class="inline-block px-4 py-2 bg-[#86C232]/10 rounded-full text-[#86C232] font-semibold mb-6">
+            Newsletter
+          </span>
+          <h2 class="text-4xl font-bold text-white mb-4">
+            Stay Updated
           </h2>
-          <p class="text-gray-300">
-            Get the latest articles and career insights delivered to your inbox weekly
+          <p class="text-gray-300 text-lg">
+            Get weekly insights and industry updates delivered to your inbox
           </p>
         </div>
         <form class="flex flex-col md:flex-row gap-4">
           <input type="email"
-                 placeholder="Enter your email"
-                 class="flex-1 px-6 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:border-[#86C232] focus:ring-2 focus:ring-[#86C232] focus:ring-opacity-50">
+                 placeholder="Enter your email address"
+                 class="flex-1 px-6 py-4 rounded-xl bg-white/5 border border-white/20 text-white placeholder-gray-400 focus:border-[#86C232] focus:ring-2 focus:ring-[#86C232] focus:ring-opacity-50 transition-all duration-300">
           <button type="submit"
-                  class="bg-gradient-to-r from-[#86C232] to-[#95D44A] text-white px-8 py-3 rounded-xl hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">
-            Subscribe
+                  class="bg-gradient-to-r from-[#86C232] to-[#95D44A] text-white px-8 py-4 rounded-xl hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 font-semibold">
+            Subscribe Now
           </button>
         </form>
       </div>

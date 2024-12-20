@@ -6,7 +6,7 @@ import { CandidatoService } from '../../services/candidato.service';
 import {
   faSearch,
   faLocationDot,
-  faArrowDown
+  faArrowDown, faChevronDown, faChartLine, faStethoscope, faBullhorn, faPalette, faCode, faArrowRight
 } from '@fortawesome/free-solid-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { Subject, takeUntil } from 'rxjs';
@@ -61,4 +61,31 @@ export class ProcuraCandidatosComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
+  popularSkills: string[] = [
+    'Software Development',
+    'UI/UX Design',
+    'Digital Marketing',
+    'Data Analysis',
+    'Healthcare'
+  ];
+  getSkillIcon(skill: string) {
+    switch (skill) {
+      case 'Software Development':
+        return faCode;
+      case 'UI/UX Design':
+        return faPalette;
+      case 'Digital Marketing':
+        return faBullhorn;
+      case 'Data Analysis':
+        return faChartLine;
+      case 'Healthcare':
+        return faStethoscope;
+      default:
+        return faSearch;
+    }
+  }
+
+  protected readonly faChevronDown = faChevronDown;
+  protected readonly faArrowRight = faArrowRight;
 }

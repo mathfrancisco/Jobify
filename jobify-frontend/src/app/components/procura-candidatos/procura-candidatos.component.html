@@ -1,86 +1,107 @@
 <!-- procura-candidatos.component.html -->
-<div class="bg-gradient-to-b from-[#0A192F] to-[#112B3C] min-h-screen py-16">
+<div class="bg-gradient-to-b from-[#0A192F] via-[#112B3C] to-[#1B4965] min-h-screen py-24">
   <div class="container mx-auto px-4">
-    <!-- Header Section -->
-    <div class="text-center mb-12">
-      <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">
-        Find Your Perfect
-        <span class="bg-gradient-to-r from-[#86C232] to-[#95D44A] text-transparent bg-clip-text">
-          Candidates
+    <!-- Enhanced Header Section -->
+    <div class="text-center mb-16 animate-fade-in">
+      <h2 class="text-5xl md:text-6xl font-bold text-white mb-6 tracking-tight">
+        Find Top
+        <span class="bg-gradient-to-r from-[#86C232] to-[#95D44A] text-transparent bg-clip-text animate-gradient">
+          Talent
         </span>
       </h2>
-      <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-        Connect with talented professionals who match your requirements and company culture.
+      <p class="text-gray-300 text-xl max-w-2xl mx-auto leading-relaxed">
+        Connect with exceptional professionals who will drive your company's success
       </p>
     </div>
 
-    <!-- Search and Filter Section -->
-    <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 mb-12 max-w-4xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="relative">
-          <fa-icon [icon]="faSearch" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></fa-icon>
+    <!-- Enhanced Search Section -->
+    <div class="bg-white/5 backdrop-blur-xl rounded-2xl p-8 mb-16 max-w-5xl mx-auto shadow-2xl border border-white/10 transform hover:scale-[1.02] transition-all duration-300">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+        <div class="md:col-span-5 relative group">
+          <fa-icon [icon]="faSearch" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-hover:text-[#86C232] transition-colors"></fa-icon>
           <input
             type="text"
             placeholder="Search by skill or role"
-            class="w-full pl-10 pr-4 py-3 bg-white/10 rounded-lg border border-gray-600 focus:border-[#86C232] text-white placeholder-gray-400">
+            class="w-full pl-12 pr-4 py-4 bg-white/5 rounded-xl border border-gray-600 focus:border-[#86C232] focus:ring-2 focus:ring-[#86C232] focus:ring-opacity-50 text-white placeholder-gray-400 transition-all hover:bg-white/10">
         </div>
-        <div class="relative">
-          <fa-icon [icon]="faLocationDot" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></fa-icon>
+
+        <div class="md:col-span-4 relative group">
+          <fa-icon [icon]="faLocationDot" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-hover:text-[#86C232] transition-colors"></fa-icon>
           <input
             type="text"
             placeholder="Location"
-            class="w-full pl-10 pr-4 py-3 bg-white/10 rounded-lg border border-gray-600 focus:border-[#86C232] text-white placeholder-gray-400">
+            class="w-full pl-12 pr-4 py-4 bg-white/5 rounded-xl border border-gray-600 focus:border-[#86C232] focus:ring-2 focus:ring-[#86C232] focus:ring-opacity-50 text-white placeholder-gray-400 transition-all hover:bg-white/10">
         </div>
-        <select class="w-full py-3 px-4 bg-white/10 rounded-lg border border-gray-600 focus:border-[#86C232] text-white">
-          <option value="">Experience Level</option>
-          <option value="junior">Junior</option>
-          <option value="mid">Mid-Level</option>
-          <option value="senior">Senior</option>
-        </select>
+
+        <div class="md:col-span-3 relative group">
+          <select class="w-full pl-4 pr-10 py-4 bg-white/5 rounded-xl border border-gray-600 focus:border-[#86C232] focus:ring-2 focus:ring-[#86C232] focus:ring-opacity-50 text-white appearance-none cursor-pointer transition-all hover:bg-white/10">
+            <option value="">Experience Level</option>
+            <option value="junior">Junior (1-2 years)</option>
+            <option value="mid">Mid-Level (3-5 years)</option>
+            <option value="senior">Senior (5+ years)</option>
+          </select>
+          <fa-icon [icon]="faChevronDown" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none transition-colors group-hover:text-[#86C232]"></fa-icon>
+        </div>
+      </div>
+
+      <!-- Enhanced Filter Tags -->
+      <div class="flex flex-wrap gap-4 mt-6">
+        <span class="text-gray-400 font-medium">Popular Skills:</span>
+        <div class="flex flex-wrap gap-3">
+          <button *ngFor="let skill of popularSkills"
+                  class="bg-white/5 hover:bg-[#86C232]/20 text-white py-2 px-4 rounded-lg text-sm transition-all duration-200 border border-white/10 hover:border-[#86C232] flex items-center gap-2">
+            <fa-icon [icon]="getSkillIcon(skill)" class="text-[#86C232]"></fa-icon>
+            {{skill}}
+          </button>
+        </div>
       </div>
     </div>
 
-    <!-- Candidates Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <!-- Enhanced Candidates Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
       <div *ngFor="let candidato of candidatos"
-           class="bg-white/10 backdrop-blur-md rounded-xl p-6 hover:transform hover:-translate-y-2 transition-all duration-300">
-        <!-- Status Badge -->
+           class="group bg-white/5 backdrop-blur-xl rounded-2xl p-6 hover:transform hover:-translate-y-2 transition-all duration-300 border border-white/10 hover:border-[#86C232]/50 hover:shadow-xl relative">
+        <!-- Enhanced Status Badge -->
         <div class="absolute top-4 right-4">
-          <span class="bg-green-500/20 text-green-400 text-xs px-2 py-1 rounded-full">
+          <span class="bg-[#86C232]/20 text-[#86C232] text-xs px-3 py-1.5 rounded-full font-medium flex items-center gap-1">
+            <span class="w-2 h-2 bg-[#86C232] rounded-full animate-pulse"></span>
             Available
           </span>
         </div>
 
-        <!-- Candidate Info -->
+        <!-- Enhanced Candidate Info -->
         <div class="text-center">
-          <div class="relative inline-block">
+          <div class="relative inline-block mb-6">
             <img
               [src]="candidato.foto || 'assets/default-avatar.png'"
               [alt]="candidato.nome"
-              class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-[#86C232]/30">
-            <div class="absolute bottom-4 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+              class="w-28 h-28 rounded-full mx-auto object-cover border-4 border-white/10 group-hover:border-[#86C232]/30 transition-colors">
+            <div class="absolute bottom-2 right-2 w-4 h-4 bg-[#86C232] rounded-full border-2 border-[#0A192F] group-hover:animate-pulse"></div>
           </div>
 
-          <h3 class="text-xl font-semibold text-white mb-2">{{ candidato.nome }}</h3>
+          <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-[#86C232] transition-colors">
+            {{ candidato.nome }}
+          </h3>
           <p class="text-[#86C232] font-medium mb-4">{{ candidato.cargo }}</p>
 
-          <!-- Skills -->
+          <!-- Enhanced Skills -->
           <div class="flex flex-wrap justify-center gap-2 mb-6">
             <span *ngFor="let habilidade of candidato.habilidades"
-                  class="bg-[#86C232]/20 text-[#86C232] py-1 px-3 rounded-full text-sm">
+                  class="bg-white/10 text-white px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-[#86C232]/20 hover:text-[#86C232] transition-colors cursor-default">
               {{ habilidade }}
             </span>
           </div>
 
-          <!-- Actions -->
+          <!-- Enhanced Actions -->
           <div class="space-y-3">
             <a [href]="candidato.curriculo"
                target="_blank"
                *ngIf="candidato.curriculo"
-               class="block w-full bg-[#86C232] text-white py-2 px-4 rounded-lg hover:bg-opacity-90 transition-colors">
-              View Profile
+               class="block w-full bg-gradient-to-r from-[#86C232] to-[#95D44A] text-white py-3 px-6 rounded-xl font-semibold hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center group">
+              <span>View Profile</span>
+              <fa-icon [icon]="faArrowRight" class="ml-2 group-hover:translate-x-1 transition-transform"></fa-icon>
             </a>
-            <button class="block w-full bg-transparent border border-[#86C232] text-[#86C232] py-2 px-4 rounded-lg hover:bg-[#86C232]/10 transition-colors">
+            <button class="block w-full bg-white/5 hover:bg-[#86C232]/20 border border-[#86C232] text-[#86C232] py-3 px-6 rounded-xl hover:shadow-lg transition-all duration-200">
               Save Profile
             </button>
           </div>
@@ -88,12 +109,12 @@
       </div>
     </div>
 
-    <!-- Load More Button -->
-    <div class="text-center mt-12" *ngIf="!allCandidatosLoaded">
+    <!-- Enhanced Load More Button -->
+    <div class="text-center mt-16" *ngIf="!allCandidatosLoaded">
       <button (click)="loadMore()"
-              class="bg-gradient-to-r from-[#86C232] to-[#95D44A] text-white font-semibold py-3 px-8 rounded-xl hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">
-        Load More Candidates
-        <fa-icon [icon]="faArrowDown" class="ml-2"></fa-icon>
+              class="bg-white/10 text-white font-semibold py-4 px-8 rounded-xl hover:bg-white/20 transition-all duration-200 flex items-center gap-3 mx-auto group">
+        <span>Discover More Talent</span>
+        <fa-icon [icon]="faArrowDown" class="group-hover:translate-y-1 transition-transform"></fa-icon>
       </button>
     </div>
   </div>

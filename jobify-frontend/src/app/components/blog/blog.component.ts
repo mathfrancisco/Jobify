@@ -5,7 +5,7 @@ import {
   faArrowRight,
   faHeart,
   faComment,
-  faBookmark
+  faBookmark, faClock, faArrowDown
 } from '@fortawesome/free-solid-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
@@ -146,4 +146,7 @@ export class BlogComponent implements OnInit {
       this.currentPage++;
     }
   }
+
+  protected readonly faClock = faClock;
+  protected readonly faArrowDown = faArrowDown;
 }
