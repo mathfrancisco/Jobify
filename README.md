@@ -1,64 +1,64 @@
-# Jobify - The Future of Recruiting 🚀
+# Jobify - Conectando Talentos com Oportunidades 🚀
 
-Jobify is a modern and intuitive recruiting platform designed to connect top talent with exciting opportunities. This project showcases a full-stack application built with Spring Boot and Angular, offering a glimpse into the future of job searching and hiring.
+Jobify é uma plataforma de recrutamento moderna e intuitiva, projetada para conectar os melhores talentos com oportunidades incríveis. Este projeto apresenta uma aplicação full-stack construída com Spring Boot e Angular, oferecendo um vislumbre do futuro da busca de empregos e contratação.
 
-[![Jobify Demo](https://img.youtube.com/vi/YOUR_DEMO_VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=YOUR_DEMO_VIDEO_ID)  *(Replace with your demo video link)*
+[![Jobify Demo](https://img.youtube.com/vi/YOUR_DEMO_VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=YOUR_DEMO_VIDEO_ID)  *(Substitua pelo link do seu vídeo de demonstração)*
 
-✨ **Key Features** ✨
+## ✨ Principais Recursos ✨
 
-* **Sleek and Intuitive Interface:**  Experience a seamless job search and application process with our user-friendly design. 👩‍💼
-* **Personalized Job Recommendations:** Discover jobs tailored to your interests and career goals. 🎯
-* **Advanced Search Filters:**  Find the perfect job with our powerful search and filtering options. 🔍
-* **Candidate Dashboard:**  Manage your profile, applications, and track your job search progress. 🧑‍💻
-* **Recruiter Dashboard:** Post jobs, manage applications, and connect with qualified candidates. 💼
-* **(Future) AI-Powered Matching:** Our intelligent algorithms will connect you with the most relevant opportunities based on your skills and experience. 🤖
-* **(Future) Direct Messaging:** Communicate directly with recruiters and hiring managers. 💬
-* **(Future) Real-Time Notifications:** Stay updated on the status of your applications and new job postings. 🔔
-* **Secure and Reliable Platform:** Your data is safe and secure with our robust infrastructure. 🔒
+* **Interface Elegante e Intuitiva:** Experimente um processo de busca e candidatura de emprego perfeito com nosso design amigável. 👩‍💼
+* **Recomendações de Empregos Personalizadas:** Descubra empregos adaptados aos seus interesses e objetivos de carreira. 🎯
+* **Filtros de Pesquisa Avançados:** Encontre o emprego perfeito com nossas poderosas opções de pesquisa e filtro. 🔍
+* **Painel do Candidato:** Gerencie seu perfil, candidaturas e acompanhe o progresso da sua busca de emprego. 🧑‍💻
+* **Painel do Recrutador:** Publique empregos, gerencie candidaturas e conecte-se com candidatos qualificados. 💼
+* **(Futuro) Correspondência Inteligente com IA:** Nossos algoritmos inteligentes conectarão você com as oportunidades mais relevantes com base em suas habilidades e experiência. 🤖
+* **(Futuro) Mensagens Diretas:** Comunique-se diretamente com recrutadores e gerentes de contratação. 💬
+* **(Futuro) Notificações em Tempo Real:** Mantenha-se atualizado sobre o status de suas candidaturas e novas vagas de emprego. 🔔
+* **Plataforma Segura e Confiável:** Seus dados estão seguros e protegidos com nossa infraestrutura robusta. 🔒
 
-🛠️ **Tech Stack** 🛠️
+## 🛠️ Tecnologias Utilizadas 🛠️
 
-* **Backend:** Java, Spring Boot, Spring Data JPA, H2 Database (in-memory for development), REST API.
-* **Frontend:** Angular 18, TypeScript, Tailwind CSS, FontAwesome, Responsive Design.
+* **Backend:** Java, Spring Boot, Spring Data JPA, Banco de Dados H2 (em memória para desenvolvimento), REST API.
+* **Frontend:** Angular 18, TypeScript, Tailwind CSS, FontAwesome, Design Responsivo.
 
-➡️ **Getting Started** ➡️
+## ➡️ Começando ➡️
 
-### Prerequisites
+### Pré-requisitos
 
-* Java Development Kit (JDK) 17 or higher
-* Node.js and npm (or yarn)
+* Java Development Kit (JDK) 17 ou superior
+* Node.js e npm (ou yarn)
 * Angular CLI
 
-### Installation
+### Instalação
 
-1. **Clone the repository:** `git clone https://github.com/YOUR_USERNAME/Jobify.git`
+1. **Clone o repositório:** `git clone https://github.com/YOUR_USERNAME/Jobify.git`
 2. **Backend (Spring Boot):**
-    - Navigate to the backend directory: `cd jobify-backend`
-    - Build and run the application: `./mvnw spring-boot:run`
-    - The API will be available at `http://localhost:8080/api`
+    * Navegue até o diretório backend: `cd jobify-backend`
+    * Compile e execute a aplicação: `./mvnw spring-boot:run`
+    * A API estará disponível em `http://localhost:8080/api`
 3. **Frontend (Angular):**
-    - Navigate to the frontend directory: `cd jobify-frontend`
-    - Install dependencies: `npm install`
-    - Run the development server: `ng serve`
-    - The application will be available at `http://localhost:4200`
+    * Navegue até o diretório frontend: `cd jobify-frontend`
+    * Instale as dependências: `npm install`
+    * Execute o servidor de desenvolvimento: `ng serve`
+    * A aplicação estará disponível em `http://localhost:4200`
 
-🗺️ **Project Roadmap** 🗺️
+## 🗺️ Roadmap do Projeto 🗺️
 
-* **Phase 1 (Complete):** Landing page, Candidate/Recruiter dashboards, and basic API endpoints. ✅
-* **Phase 2:** User authentication (login/signup) and enhanced profile management. 🔜
-* **Phase 3:** Database migration to PostgreSQL and data persistence. ⏳
-* **Phase 4:** AI-powered job matching and recommendations. 🤖
-* **Phase 5:** Direct messaging and real-time notifications. 💬🔔
-* **Phase 6:** Admin dashboard and advanced platform management features. 📊
+* **Fase 1 (Concluída):** Página inicial, painéis de Candidato/Recrutador e endpoints básicos da API. ✅
+* **Fase 2:** Autenticação do usuário (login/cadastro) e gerenciamento aprimorado de perfil. 🔜
+* **Fase 3:** Migração do banco de dados para PostgreSQL e persistência de dados. ⏳
+* **Fase 4:** Correspondência de empregos e recomendações com tecnologia de IA. 🤖
+* **Fase 5:** Mensagens diretas e notificações em tempo real. 💬🔔
+* **Fase 6:** Painel de administração e recursos avançados de gerenciamento de plataforma. 📊
 
-🤝 **Contributing** 🤝
+## 🤝 Contribuindo 🤝
 
-We welcome contributions!  Please feel free to open issues and submit pull requests.  See our [Contribution Guidelines](CONTRIBUTING.md) for more details.
+Agradecemos as contribuições! Sinta-se à vontade para abrir issues e enviar pull requests. Consulte nossas [Diretrizes de Contribuição](CONTRIBUTING.md) para obter mais detalhes.
 
-📝 **License** 📝
+## 📝 Licença 📝
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
+Este projeto está licenciado sob a Licença MIT - consulte o arquivo [LICENSE](LICENSE.md) para obter detalhes.
 
-📞 **Contact** 📞
+## 📞 Contato 📞
 
-For any questions or inquiries, please contact [Matheus/math.francisco2@gmail.com].
+Para qualquer dúvida ou solicitação, entre em contato com [SEU NOME/SEU EMAIL].
