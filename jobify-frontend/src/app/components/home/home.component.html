@@ -11,37 +11,70 @@
 
     <!-- Main Content -->
     <div class="flex flex-col lg:flex-row-reverse items-center gap-16 relative z-10">
-      <!-- Right Side (Image & Stats) -->
-      <div class="lg:w-1/2 relative">
-        <div class="rounded-3xl overflow-hidden shadow-2xl border border-white/10 backdrop-blur-xl transform hover:scale-[1.02] transition-all duration-500">
-          <img src="assets/images/hero-image.png" alt="Job Search" class="w-full h-auto">
+   <!-- Right Side (Animated Icons) -->
+<div class="lg:w-1/2 relative min-h-[600px]">
+  <!-- Container principal para animações -->
+  <div class="hidden lg:block absolute inset-0">
+    <!-- Container central dos ícones -->
+    <div class="absolute w-full h-full flex items-center justify-center">
+      <!-- Grupo central de animações -->
+      <div class="relative space-y-16">
+        <!-- Ícone Principal (Rocket) -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2">
+          <div class="animate-bounce-slow text-8xl text-[#86C232] transform hover:scale-110 transition-transform">
+            <fa-icon [icon]="faRocket"></fa-icon>
+          </div>
+        </div>
 
-          <!-- Floating Stats -->
-          <div class="absolute -bottom-8 -left-8 bg-white/10 backdrop-blur-xl rounded-2xl p-6 shadow-2xl border border-white/10 transform hover:-translate-y-2 transition-all duration-300">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 bg-[#86C232]/20 rounded-full flex items-center justify-center">
-                <fa-icon [icon]="faBriefcase" class="text-[#86C232] text-xl"></fa-icon>
-              </div>
-              <div>
-                <div class="text-[#86C232] font-bold text-3xl">{{getRandomJobCount()}}</div>
-                <div class="text-white text-sm">New Jobs Today</div>
-              </div>
-            </div>
+        <!-- Ícones Secundários -->
+        <div class="flex justify-around space-x-32">
+          <!-- Ícone de Pesquisa -->
+          <div class="animate-pulse-slow text-6xl text-[#95D44A] transform hover:scale-110 transition-transform">
+            <fa-icon [icon]="faSearch"></fa-icon>
           </div>
 
-          <div class="absolute -top-8 -right-8 bg-white/10 backdrop-blur-xl rounded-2xl p-6 shadow-2xl border border-white/10 transform hover:-translate-y-2 transition-all duration-300">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 bg-[#95D44A]/20 rounded-full flex items-center justify-center">
-                <fa-icon [icon]="faUserGroup" class="text-[#95D44A] text-xl"></fa-icon>
-              </div>
-              <div>
-                <div class="text-[#95D44A] font-bold text-3xl">50k+</div>
-                <div class="text-white text-sm">Active Users</div>
-              </div>
-            </div>
+          <!-- Ícone de Carreira -->
+          <div class="animate-float text-6xl text-[#61892F] transform hover:scale-110 transition-transform">
+            <fa-icon [icon]="faBriefcase"></fa-icon>
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Card Flutuante Superior -->
+    <div class="absolute top-12 right-12 glass-effect p-6 hover-lift">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 bg-[#95D44A]/20 rounded-full flex items-center justify-center">
+          <fa-icon [icon]="faUserGroup" class="text-[#95D44A] text-xl"></fa-icon>
+        </div>
+        <div>
+          <div class="text-[#95D44A] font-bold text-3xl animate-count">50k+</div>
+          <div class="text-white text-sm">Active Users</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card Flutuante Inferior -->
+    <div class="absolute bottom-12 left-12 glass-effect p-6 hover-lift">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 bg-[#86C232]/20 rounded-full flex items-center justify-center">
+          <fa-icon [icon]="faBriefcase" class="text-[#86C232] text-xl"></fa-icon>
+        </div>
+        <div>
+          <div class="text-[#86C232] font-bold text-3xl animate-count">{{getRandomJobCount()}}</div>
+          <div class="text-white text-sm">New Jobs Today</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Elementos de Fundo Decorativos -->
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="animate-float-slow absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-[#86C232]/10 blur-2xl"></div>
+      <div class="animate-float absolute bottom-1/4 right-1/4 w-40 h-40 rounded-full bg-[#95D44A]/10 blur-2xl"></div>
+    </div>
+  </div>
+</div>
+
 
       <!-- Left Side (Content) -->
       <div class="lg:w-1/2 space-y-10">

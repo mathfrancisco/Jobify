@@ -115,3 +115,105 @@ img {
   hover:shadow-lg transition-all duration-200
   flex items-center justify-center;
 }
+
+/* Adicione estas novas animações ao seu CSS */
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-30px); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(0.95); }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 3s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+.glass-effect {
+  @apply backdrop-blur-xl bg-white/10 border border-white/10 rounded-2xl shadow-2xl;
+}
+
+.hover-lift {
+  @apply transform transition-all duration-300 hover:-translate-y-2 hover:bg-white/20;
+}
+
+@keyframes count {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-count {
+  animation: count 1s ease-out;
+}
+/* Animações específicas para o lado direito */
+@keyframes icon-float {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, -30px); }
+}
+
+@keyframes side-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* Container principal do lado direito */
+.right-side-container {
+  @apply relative min-h-[600px] w-full;
+  perspective: 1000px;
+}
+
+/* Posicionamento e estilo dos ícones principais */
+.icon-container {
+  @apply absolute w-full h-full flex items-center justify-center;
+}
+
+/* Ícone principal (Rocket) */
+.main-icon {
+  @apply absolute left-1/2 top-[20%];
+  animation: icon-float 4s ease-in-out infinite;
+}
+
+/* Container dos ícones secundários */
+.secondary-icons {
+  @apply absolute top-[60%] left-0 w-full flex justify-center gap-32;
+}
+
+/* Cards flutuantes */
+.floating-card {
+  @apply glass-effect p-6;
+  animation: side-float 6s ease-in-out infinite;
+}
+
+.floating-card-top {
+  @apply absolute top-12 right-12;
+  animation-delay: 0.5s;
+}
+
+.floating-card-bottom {
+  @apply absolute bottom-12 left-12;
+  animation-delay: 1s;
+}
+
+/* Efeitos de hover aprimorados */
+.icon-hover {
+  @apply transform transition-all duration-300;
+}
+
+.icon-hover:hover {
+  @apply scale-110 filter brightness-110;
+  text-shadow: 0 0 15px currentColor;
+}
+
+/* Elementos decorativos de fundo */
+.background-decorator {
+  @apply absolute rounded-full opacity-20 blur-2xl;
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+/* Ajuste o HTML para usar estas novas classes */
