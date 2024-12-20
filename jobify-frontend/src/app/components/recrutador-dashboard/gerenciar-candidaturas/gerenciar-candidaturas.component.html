@@ -1,36 +1,167 @@
-<div class="container mx-auto px-4 py-8">
-  <h2 class="text-3xl font-bold text-white mb-6">Gerenciar Candidaturas - Vaga {{ vagaId }}</h2>
-
-  <div *ngIf="candidaturas.length > 0; else semCandidaturas">
-    <ul class="bg-white/10 backdrop-blur-md rounded-xl p-6">
-      <li *ngFor="let candidatura of candidaturas" class="border-b border-gray-700 py-4">
-        <div class="flex items-center justify-between">
-          <div>
-            <h3 class="text-xl font-semibold text-white">{{ candidatura.candidato.nome }}</h3>
-            <p class="text-gray-400">{{ candidatura.dataAplicacao | date }}</p>
+<!-- gerenciar-candidaturas.component.html -->
+<div class="bg-gradient-to-b from-[#0A192F] via-[#112B3C] to-[#1B4965] min-h-screen">
+  <!-- Header -->
+  <div class="w-full bg-white/5 backdrop-blur-lg border-b border-white/10 py-4">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center">
+          <button (click)="voltar()" class="text-white hover:text-[#86C232] transition-colors mr-4">
+            <i class="fas fa-arrow-left text-xl"></i>
+          </button>
+          <h1 class="text-2xl font-bold text-white">Gerenciar Candidaturas</h1>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="text-center">
+            <p class="text-sm text-gray-400">Total de Candidaturas</p>
+            <p class="text-xl font-bold text-white">{{candidaturas.length}}</p>
           </div>
-          <div>
-            <p class="text-white font-medium">{{ candidatura.status }}</p>
-          </div>
         </div>
-        <div class="mt-2">
-          <a [href]="candidatura.candidato.curriculo" target="_blank" *ngIf="candidatura.candidato.curriculo" class="text-[#86C232] hover:underline">Ver currículo</a>
-        </div>
-        <div class="mt-4">
-          <button class="bg-green-500 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded mr-2"
-                  (click)="atualizarStatus(candidatura, 'Aprovado')">Aprovar</button>
-
-          <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-semibold py-2 px-4 rounded mr-2"
-                  (click)="atualizarStatus(candidatura, 'Entrevista agendada')">Agendar Entrevista</button>
-
-          <button class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded"
-                  (click)="atualizarStatus(candidatura, 'Rejeitado')">Rejeitar</button>
-        </div>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 
-  <ng-template #semCandidaturas>
-    <p class="text-white">Não há candidaturas para esta vaga.</p>
-  </ng-template>
+  <div class="container mx-auto px-4 py-8">
+    <!-- Informações da Vaga -->
+    <div class="bg-white/10 backdrop-blur-xl rounded-2xl p-6 shadow-xl border border-white/10 mb-8">
+      <div class="flex justify-between items-start">
+        <div>
+          <h2 class="text-2xl font-bold text-white">{{vaga?.titulo}}</h2>
+          <p class="text-gray-400">{{vaga?.empresa}} • {{vaga?.localizacao}}</p>
+        </div>
+        <span class="px-4 py-2 bg-[#86C232]/20 text-[#86C232] rounded-full text-sm font-medium">
+          {{vaga?.tipo}}
+        </span>
+      </div>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <span *ngFor="let skill of vaga?.skills"
+              class="px-3 py-1 bg-white/10 text-gray-300 rounded-full text-sm">
+          {{skill}}
+        </span>
+      </div>
+    </div>
+
+    <!-- Filtros e Pesquisa -->
+    <div class="bg-white/10 backdrop-blur-xl rounded-2xl p-4 mb-8">
+      <div class="flex flex-wrap gap-4 items-center">
+        <div class="flex-1">
+          <input type="text"
+                 placeholder="Pesquisar candidatos..."
+                 class="w-full bg-white/10 border border-gray-600 text-white py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232]">
+        </div>
+        <div class="flex gap-2">
+          <select class="bg-white/10 border border-gray-600 text-white py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232]">
+            <option value="">Todos os Status</option>
+            <option value="Em análise">Em análise</option>
+            <option value="Entrevista">Entrevista</option>
+            <option value="Aprovado">Aprovado</option>
+            <option value="Rejeitado">Rejeitado</option>
+          </select>
+          <button class="px-4 py-2 bg-[#86C232] text-white rounded-lg hover:bg-[#61892F] transition-colors">
+            <i class="fas fa-filter"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lista de Candidaturas -->
+    <div *ngIf="candidaturas.length > 0; else semCandidaturas" class="space-y-4">
+      <div *ngFor="let candidatura of candidaturas"
+           class="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/10 hover:border-[#86C232] transition-all">
+        <div class="flex justify-between items-start">
+          <!-- Informações do Candidato -->
+          <div class="flex items-start space-x-4">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-r from-[#86C232] to-[#61892F] flex items-center justify-center">
+              <span class="text-white text-lg font-bold">
+                {{candidatura.candidato.nome.charAt(0)}}
+              </span>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold text-white">{{candidatura.candidato.nome}}</h3>
+              <p class="text-gray-400">Aplicou em {{candidatura.dataAplicacao | date}}</p>
+            </div>
+          </div>
+
+          <!-- Status atual -->
+          <span [ngClass]="{
+            'bg-yellow-500/20 text-yellow-500': candidatura.status === 'Em análise',
+            'bg-blue-500/20 text-blue-500': candidatura.status === 'Entrevista agendada',
+            'bg-green-500/20 text-green-500': candidatura.status === 'Aprovado',
+            'bg-red-500/20 text-red-500': candidatura.status === 'Rejeitado'
+          }" class="px-4 py-2 rounded-full text-sm font-medium">
+            {{candidatura.status}}
+          </span>
+        </div>
+
+        <!-- Detalhes e Ações -->
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <h4 class="text-gray-400 mb-2">Habilidades</h4>
+            <div class="flex flex-wrap gap-2">
+              <span *ngFor="let skill of candidatura.candidato.habilidades"
+                    class="px-3 py-1 bg-white/10 text-gray-300 rounded-full text-sm">
+                {{skill}}
+              </span>
+            </div>
+          </div>
+          <div class="flex flex-col md:items-end justify-between">
+            <a *ngIf="candidatura.candidato.curriculo"
+               [href]="candidatura.candidato.curriculo"
+               target="_blank"
+               class="text-[#86C232] hover:text-[#61892F] transition-colors flex items-center gap-2">
+              <i class="fas fa-file-pdf"></i>
+              Ver Currículo
+            </a>
+
+            <!-- Ações -->
+            <div class="flex flex-wrap gap-2 mt-4">
+              <button (click)="atualizarStatus(candidatura, 'Entrevista agendada')"
+                      class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors flex items-center gap-2">
+                <i class="fas fa-calendar"></i>
+                Agendar Entrevista
+              </button>
+
+              <button (click)="atualizarStatus(candidatura, 'Aprovado')"
+                      class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors flex items-center gap-2">
+                <i class="fas fa-check"></i>
+                Aprovar
+              </button>
+
+              <button (click)="atualizarStatus(candidatura, 'Rejeitado')"
+                      class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors flex items-center gap-2">
+                <i class="fas fa-times"></i>
+                Rejeitar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Template para quando não houver candidaturas -->
+    <ng-template #semCandidaturas>
+      <div class="bg-white/10 backdrop-blur-xl rounded-2xl p-8 text-center">
+        <i class="fas fa-users-slash text-4xl text-gray-400 mb-4"></i>
+        <h3 class="text-xl font-semibold text-white mb-2">Nenhuma Candidatura Ainda</h3>
+        <p class="text-gray-400">Esta vaga ainda não recebeu candidaturas.</p>
+      </div>
+    </ng-template>
+  </div>
+
+  <!-- Modal de Confirmação (opcional) -->
+  <div *ngIf="showConfirmModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center">
+    <div class="bg-[#0A192F] rounded-2xl p-6 max-w-md w-full mx-4">
+      <h3 class="text-xl font-bold text-white mb-4">Confirmar Alteração</h3>
+      <p class="text-gray-400">Tem certeza que deseja alterar o status desta candidatura?</p>
+      <div class="flex justify-end gap-4 mt-6">
+        <button (click)="showConfirmModal = false"
+                class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg">
+          Cancelar
+        </button>
+        <button (click)="confirmarAlteracaoStatus()"
+                class="px-4 py-2 bg-[#86C232] hover:bg-[#61892F] text-white rounded-lg">
+          Confirmar
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

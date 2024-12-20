@@ -1,20 +1,14 @@
 // candidato-dashboard.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router'; // Importe o Router
+import { ActivatedRoute, Router } from '@angular/router';
 import { CandidatoService } from '../../services/candidato.service';
 import { Candidato } from '../../models/candidato';
-import {Observable, of, switchMap, combineLatest, map} from 'rxjs';
+import {Observable, of, switchMap, withLatestFrom, map, catchError, combineLatest} from 'rxjs';
 import { VagaService } from '../../services/vaga.service';
 import { Vaga } from '../../models/vaga';
-import { CandidaturaService } from '../../services/candidatura.service'; // Importe o serviço
-import { Candidatura } from '../../models/candidatura'; 
-
-interface Candidatura {
-  vaga: Vaga;
-  status: string;
-  dataAplicacao: Date;
-}
+import { CandidaturaService } from '../../services/candidatura.service';
+import { Candidatura } from '../../models/candidatura';
 
 @Component({
   selector: 'app-candidato-dashboard',
@@ -30,17 +24,18 @@ export class CandidatoDashboardComponent implements OnInit {
   candidaturas: Candidatura[] = [];
   paginaAtual = 0;
   tamanhoPagina = 10;
-  carregandoCandidatura: { [vagaId: number]: boolean } = {}; // Para controlar o loading por vaga
-  mensagemSucesso: string | null = null; // Para exibir a mensagem de sucesso
+  carregandoCandidatura: { [vagaId: number]: boolean } = {};
+  mensagemSucesso: string | null = null;
+  mensagemErro: string | null = null; // Nova variável para mensagens de erro
 
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router, // Injete o Router
+    private router: Router,
     private candidatoService: CandidatoService,
     private vagaService: VagaService,
     private candidaturaService: CandidaturaService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.candidato$ = this.route.paramMap.pipe(
@@ -49,72 +44,81 @@ export class CandidatoDashboardComponent implements OnInit {
         if (id) {
           return this.candidatoService.getCandidatoById(id);
         } else {
-          console.error("ID do candidato não encontrado na rota.");
+          // Lide com o caso em que o ID não é encontrado.  Talvez redirecione para uma página de erro?
+          console.error("ID do candidato não encontrado na URL");
           return of(undefined);
         }
       })
     );
 
-    // Buscar vagas e candidaturas
     this.candidato$.subscribe(candidato => {
       if (candidato) {
-        // Buscar todas as vagas
-        this.vagaService.getVagas(this.paginaAtual, this.tamanhoPagina).subscribe(vagas => {
-          this.vagas = vagas;
+        this.carregarDados(candidato.id);
+      }
+    });
+  }
 
-          // Simular a busca de candidaturas (substitua pela lógica real)
-          this.candidaturas = this.vagas.slice(0, 2).map(vaga => ({
-            vaga: vaga,
-            status: ['Em análise', 'Entrevista agendada', 'Aprovado', 'Rejeitado'][Math.floor(Math.random() * 4)],
-            dataAplicacao: new Date()
-          }));
+  carregarDados(candidatoId: number) {
+    // Use combineLatest para buscar vagas e candidaturas em paralelo
+    combineLatest([
+      this.vagaService.getVagas(this.paginaAtual, this.tamanhoPagina),
+      this.candidaturaService.getCandidaturasPorCandidato(candidatoId)
+    ]).pipe(
+      catchError(error => {
+        console.error('Erro ao carregar dados:', error);
+        this.mensagemErro = 'Erro ao carregar dados.'; // Define a mensagem de erro
+        return of([[], []]); // Retorna arrays vazios para evitar erros no template
+      })
+    ).subscribe(([vagas, candidaturas]) => {
+      this.vagas = vagas;
+      this.candidaturas = candidaturas;
 
-          // Recomendar vagas com base nas habilidades do candidato (substitua pela lógica real)
+      // Recomenda vagas apenas se houver um candidato
+      this.candidato$.subscribe(candidato => {
+        if (candidato) {
           this.vagasRecomendadas = this.vagas.filter(vaga =>
             vaga.skills.some(skill => candidato.habilidades.includes(skill))
           );
-        });
-
-
-      }
+        }
+      });
     });
   }
 
   editarPerfil() {
     this.candidato$.subscribe(candidato => {
       if (candidato) {
-        // Navegar para a página de edição de perfil, passando o ID do candidato
         this.router.navigate(['/candidato', candidato.id, 'editar']);
       }
     });
   }
 
   candidatarSe(vaga: Vaga) {
-    this.carregandoCandidatura[vaga.id] = true; // Inicia o loading
-    this.candidato$.subscribe(candidato => {
+    this.carregandoCandidatura[vaga.id] = true;
+    this.mensagemErro = null; // Limpa a mensagem de erro
+
+    of(vaga).pipe(
+      withLatestFrom(this.candidato$)
+    ).subscribe(([vaga, candidato]) => {
       if (candidato) {
         const novaCandidatura: Candidatura = {
           vaga: vaga,
-          candidato: candidato, // Associe o candidato à candidatura
+          candidato: candidato,
           status: 'Em análise',
           dataAplicacao: new Date(),
           skillstexto: vaga.skills.join(', ')
         };
 
-         this.candidaturaService.criarCandidatura(novaCandidatura).subscribe({
+        this.candidaturaService.criarCandidatura(novaCandidatura).subscribe({
           next: (candidaturaCriada) => {
-            console.log('Candidatura criada com sucesso:', candidaturaCriada);
-            this.candidaturas.push(candidaturaCriada); // Atualiza a lista local
-            this.carregandoCandidatura[vaga.id] = false; // Para o loading
-            this.mensagemSucesso = `Candidatura para ${vaga.titulo} enviada com sucesso!`; // Define a mensagem de sucesso
-         setTimeout(() => {
-              this.mensagemSucesso = null; // Limpa a mensagem após um tempo
-            }, 5000); // 5 segundos
+            this.candidaturas.push(candidaturaCriada);
+            this.carregandoCandidatura[vaga.id] = false;
+            this.mensagemSucesso = `Candidatura para ${vaga.titulo} enviada com sucesso!`;
+            setTimeout(() => this.mensagemSucesso = null, 5000);
           },
           error: (error) => {
             console.error('Erro ao criar candidatura:', error);
-            this.carregandoCandidatura[vaga.id] = false; // Para o loading
-            // Exibir uma mensagem de erro para o usuário
+            this.carregandoCandidatura[vaga.id] = false;
+            this.mensagemErro = 'Erro ao criar candidatura.'; // Define a mensagem de erro
           }
         });
       }

@@ -1,4 +1,4 @@
-// CandidaturaController.java
+package lp.jobify.controller;// CandidaturaController.java
 import lp.jobify.model.Candidatura;
 import lp.jobify.repository.CandidaturaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +51,7 @@ public class CandidaturaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluirCandidatura(@PathVariable Long id) {
+    public ResponseEntity<Object> excluirCandidatura(@PathVariable Long id) {
         return candidaturaRepository.findById(id)
                 .map(candidatura -> {
                     candidaturaRepository.delete(candidatura);

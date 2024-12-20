@@ -1,46 +1,168 @@
 <!-- criar-vaga.component.html -->
-<div class="container mx-auto px-4 py-8">
-  <h2 class="text-3xl font-bold text-white mb-6">Criar Nova Vaga</h2>
+<div class="bg-gradient-to-b from-[#0A192F] via-[#112B3C] to-[#1B4965] min-h-screen">
+  <!-- Header -->
+  <div class="w-full bg-white/5 backdrop-blur-lg border-b border-white/10 py-4">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center">
+        <button (click)="voltar()" class="text-white hover:text-[#86C232] transition-colors mr-4">
+          <i class="fas fa-arrow-left text-xl"></i>
+        </button>
+        <h1 class="text-2xl font-bold text-white">Criar Nova Vaga</h1>
+      </div>
+    </div>
+  </div>
 
-  <form (ngSubmit)="criarVaga()">
-    <div class="mb-4">
-      <label for="titulo" class="block text-gray-300 font-medium mb-2">Título:</label>
-      <input type="text" id="titulo" name="titulo" [(ngModel)]="novaVaga.titulo" class="w-full bg-white/10 border border-gray-600 text-white py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232]" required>
+  <div class="container mx-auto px-4 py-8 max-w-3xl">
+    <!-- Card Principal -->
+    <div class="bg-white/10 backdrop-blur-xl rounded-2xl p-8 shadow-xl border border-white/10">
+      <form (ngSubmit)="criarVaga()" class="space-y-6">
+        <!-- Seção: Informações Básicas -->
+        <div class="space-y-6">
+          <h2 class="text-xl font-semibold text-white flex items-center">
+            <i class="fas fa-info-circle mr-2"></i>
+            Informações Básicas
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label for="titulo" class="block text-gray-300 font-medium mb-2">
+                Título da Vaga <span class="text-red-500">*</span>
+              </label>
+              <input type="text"
+                     id="titulo"
+                     name="titulo"
+                     [(ngModel)]="novaVaga.titulo"
+                     class="w-full bg-white/10 border border-gray-600 text-white py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232] transition-all"
+                     required>
+            </div>
+
+            <div>
+              <label for="empresa" class="block text-gray-300 font-medium mb-2">
+                Empresa <span class="text-red-500">*</span>
+              </label>
+              <input type="text"
+                     id="empresa"
+                     name="empresa"
+                     [(ngModel)]="novaVaga.empresa"
+                     class="w-full bg-white/10 border border-gray-600 text-white py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232] transition-all"
+                     required>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção: Detalhes da Vaga -->
+        <div class="space-y-6 pt-6 border-t border-gray-700">
+          <h2 class="text-xl font-semibold text-white flex items-center">
+            <i class="fas fa-briefcase mr-2"></i>
+            Detalhes da Vaga
+          </h2>
+
+          <div>
+            <label for="descricao" class="block text-gray-300 font-medium mb-2">
+              Descrição Detalhada <span class="text-red-500">*</span>
+            </label>
+            <textarea id="descricao"
+                      name="descricao"
+                      [(ngModel)]="novaVaga.descricao"
+                      rows="6"
+                      class="w-full bg-white/10 border border-gray-600 text-white py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232] transition-all"
+                      required></textarea>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label for="localizacao" class="block text-gray-300 font-medium mb-2">
+                Localização <span class="text-red-500">*</span>
+              </label>
+              <input type="text"
+                     id="localizacao"
+                     name="localizacao"
+                     [(ngModel)]="novaVaga.localizacao"
+                     class="w-full bg-white/10 border border-gray-600 text-white py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232] transition-all"
+                     required>
+            </div>
+
+            <div>
+              <label for="tipo" class="block text-gray-300 font-medium mb-2">
+                Tipo de Contratação <span class="text-red-500">*</span>
+              </label>
+              <select id="tipo"
+                      name="tipo"
+                      [(ngModel)]="novaVaga.tipo"
+                      class="w-full bg-white/10 border border-gray-600 text-white py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232] transition-all"
+                      required>
+                <option value="" disabled selected>Selecione o tipo</option>
+                <option value="Full-time">Full-time</option>
+                <option value="Part-time">Part-time</option>
+                <option value="Estágio">Estágio</option>
+                <option value="Freelancer">Freelancer</option>
+                <option value="Temporário">Temporário</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção: Habilidades Requeridas -->
+        <div class="space-y-6 pt-6 border-t border-gray-700">
+          <h2 class="text-xl font-semibold text-white flex items-center">
+            <i class="fas fa-tools mr-2"></i>
+            Habilidades Requeridas
+          </h2>
+
+          <div>
+            <label for="skills" class="block text-gray-300 font-medium mb-2">
+              Habilidades <span class="text-gray-400 text-sm">(separadas por vírgula)</span>
+              <span class="text-red-500">*</span>
+            </label>
+            <input type="text"
+                   id="skills"
+                   name="skills"
+                   [(ngModel)]="novaVaga.skillsTexto"
+                   placeholder="Ex: JavaScript, React, Node.js"
+                   class="w-full bg-white/10 border border-gray-600 text-white py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232] transition-all"
+                   required>
+            <p class="text-gray-400 text-sm mt-2">
+              <i class="fas fa-info-circle mr-1"></i>
+              Digite as habilidades separadas por vírgula
+            </p>
+          </div>
+        </div>
+
+        <!-- Botões de Ação -->
+        <div class="flex justify-end space-x-4 pt-6 border-t border-gray-700">
+          <button type="button"
+                  (click)="cancelar()"
+                  class="px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors flex items-center">
+            <i class="fas fa-times mr-2"></i>
+            Cancelar
+          </button>
+
+          <button type="submit"
+                  class="px-6 py-3 bg-[#86C232] hover:bg-[#61892F] text-white rounded-lg transition-colors flex items-center">
+            <i class="fas fa-save mr-2"></i>
+            Publicar Vaga
+          </button>
+        </div>
+      </form>
     </div>
 
-    <div class="mb-4">
-      <label for="descricao" class="block text-gray-300 font-medium mb-2">Descrição:</label>
-      <textarea id="descricao" name="descricao" [(ngModel)]="novaVaga.descricao" class="w-full bg-white/10 border border-gray-600 text-white py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232]" required></textarea>
+    <!-- Preview da Vaga -->
+    <div *ngIf="novaVaga.titulo" class="mt-8 bg-white/10 backdrop-blur-xl rounded-2xl p-6 shadow-xl border border-white/10">
+      <h3 class="text-lg font-semibold text-white mb-4 flex items-center">
+        <i class="fas fa-eye mr-2"></i>
+        Preview da Vaga
+      </h3>
+      <div class="space-y-4">
+        <h4 class="text-xl font-bold text-white">{{novaVaga.titulo}}</h4>
+        <p class="text-gray-400">{{novaVaga.empresa}} • {{novaVaga.localizacao}}</p>
+        <p class="text-white">{{novaVaga.descricao}}</p>
+        <div class="flex flex-wrap gap-2">
+          <span *ngFor="let skill of novaVaga.skillsTexto?.split(',')"
+                class="px-3 py-1 bg-[#86C232]/20 text-[#86C232] rounded-full text-sm">
+            {{skill.trim()}}
+          </span>
+        </div>
+      </div>
     </div>
-
-    <div class="mb-4">
-      <label for="empresa" class="block text-gray-300 font-medium mb-2">Empresa:</label>
-      <input type="text" id="empresa" name="empresa" [(ngModel)]="novaVaga.empresa" class="w-full bg-white/10 border border-gray-600 text-white py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232]" required>
-    </div>
-
-    <div class="mb-4">
-      <label for="localizacao" class="block text-gray-300 font-medium mb-2">Localização:</label>
-      <input type="text" id="localizacao" name="localizacao" [(ngModel)]="novaVaga.localizacao" class="w-full bg-white/10 border border-gray-600 text-white py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232]" required>
-    </div>
-
-    <div class="mb-4">
-      <label for="tipo" class="block text-gray-300 font-medium mb-2">Tipo:</label>
-      <select id="tipo" name="tipo" [(ngModel)]="novaVaga.tipo" class="w-full bg-white/10 border border-gray-600 text-white py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232]" required>
-        <option value="Full-time">Full-time</option>
-        <option value="Part-time">Part-time</option>
-        <option value="Estágio">Estágio</option>
-        <!-- Adicione mais opções conforme necessário -->
-      </select>
-    </div>
-
-    <div class="mb-4">
-      <label for="skills" class="block text-gray-300 font-medium mb-2">Habilidades (separadas por vírgula):</label>
-      <input type="text" id="skills" name="skills" [(ngModel)]="novaVaga.skillsTexto" class="w-full bg-white/10 border border-gray-600 text-white py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#86C232]" required>
-    </div>
-
-
-    <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-      Criar Vaga
-    </button>
-  </form>
+  </div>
 </div>
