@@ -31,7 +31,7 @@ Jobify é uma plataforma de recrutamento moderna e intuitiva, projetada para con
 
 ### Instalação
 
-1. **Clone o repositório:** `git clone https://github.com/YOUR_USERNAME/Jobify.git`
+1. **Clone o repositório:** `git clone https://github.com/mathfrancisco/Jobify.git`
 2. **Backend (Spring Boot):**
     * Navegue até o diretório backend: `cd jobify-backend`
     * Compile e execute a aplicação: `./mvnw spring-boot:run`
@@ -61,4 +61,4 @@ Este projeto está licenciado sob a Licença MIT - consulte o arquivo [LICENSE](
 
 ## 📞 Contato 📞
 
-Para qualquer dúvida ou solicitação, entre em contato com [SEU NOME/SEU EMAIL].
+Para qualquer dúvida ou solicitação, entre em contato com Matheus - math.francisco2@gmail.com.
