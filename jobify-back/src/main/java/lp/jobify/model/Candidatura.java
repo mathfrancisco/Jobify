@@ -1,17 +1,15 @@
 package lp.jobify.model;
 
 import jakarta.persistence.*;
-import lp.jobify.model.Candidato;
-import lp.jobify.model.Vaga;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 
-import jakarta.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.Objects;
 
 
-@Data
+@ToString
+@RequiredArgsConstructor
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -32,6 +30,10 @@ public class Candidatura {
     private String status;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dataAplicacao;
+    private LocalDate dataAplicacao;
+
+    public void setDataAplicacao(LocalDate dataAplicacao) {
+        this.dataAplicacao = dataAplicacao;
+    }
 
 }

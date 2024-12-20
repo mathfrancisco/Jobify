@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -31,12 +32,13 @@ public class CandidaturaController {
 
     @PostMapping
     public ResponseEntity<Candidatura> criarCandidatura(@RequestBody Candidatura candidatura) {
-        candidatura.setDataAplicacao(new Date());
+        candidatura.setDataAplicacao(LocalDate.now()); // Corrigido
         Candidatura novaCandidatura = candidaturaRepository.save(candidatura);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(novaCandidatura.getId()).toUri();
         return ResponseEntity.created(location).body(novaCandidatura);
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Candidatura> atualizarCandidatura(@PathVariable Long id, @RequestBody Candidatura candidatura) {
